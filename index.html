@@ -622,7 +622,7 @@ nav.menu{display:none!important}
 <!-- REVIEWS -->
 <section id="reviews" data-pg="reviews">
  <div class="wrap">
-  <div class="sec-h rev"><h2>✉️ Đánh giá khách hàng</h2><p>Time Lens tin vào ảnh thật – feedback thật. Khung dưới đây là <b>ví dụ</b>, chủ shop thay bằng ảnh/video feedback thật của khách.</p></div>
+  <div class="sec-h rev"><h2>✉️ Đánh giá khách hàng</h2><p>Time Lens tin vào ảnh thật – feedback thật. Khung dưới đây là <b>ví dụ</b></div>
   <div class="film" id="rvSlider" role="region" aria-label="Dải phim feedback khách hàng"></div>
   <div class="grid c3" style="margin-top:20px">
    <div class="glass card"><h3>📸 Ảnh thật</h3><p>Ảnh thật từng body, lens và phụ kiện.</p></div>
@@ -1015,7 +1015,7 @@ $("#faqQ").oninput=renderFaq;renderFaq();
 $("#blogGrid").innerHTML=BLOG.map(b=>`<article class="glass card hov"><span class="badge" style="align-self:flex-start">${esc(b[0])}</span><h3>${esc(b[1])}</h3><p class="note">${esc(b[2])}</p><div class="ctas"><a class="btn btn-g btn-s" href="${b[3]}">${esc(b[4])} →</a></div></article>`).join("");
 
 /* ========= REVIEWS (placeholder) ========= */
-{const one=[1,2,3,4].map(i=>`<figure class="frame"><div class="fr"><div class="box">📸 Ảnh/video feedback thật của khách<br>(ví dụ – ${i})</div><p class="note">Tên khách &amp; nội dung đánh giá sẽ hiển thị ở đây. <b>[Thay bằng feedback thật]</b></p></div></figure>`).join(""),
+{const one=[1,2,3,4].map(i=>`<figure class="frame"><div class="fr"><div class="box">📸 Ảnh/video feedback thật<br>(ví dụ – ${i})</div><p class="note">Tên khách &amp; nội dung đánh giá sẽ hiển thị ở đây.</p></div></figure>`).join(""),
   set=one+one; /* 8 khung/bộ để dải luôn phủ kín rồi nhân đôi cho vòng lặp liền mạch */
   $("#rvSlider").innerHTML=`<div class="film-track">${set}${set.replaceAll('<figure class="frame">','<figure class="frame" aria-hidden="true">')}</div>`}
 
