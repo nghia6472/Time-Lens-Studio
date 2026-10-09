@@ -712,8 +712,7 @@ const PRICES={
 const NEEDS={vlog:"Vlog/TikTok",portrait:"Chân dung",travel:"Du lịch",product:"Sản phẩm",event:"Cưới/Sự kiện",premium:"Cao cấp/Thương mại",street:"Street/Lifestyle"};
 const BRANDS=["Sony","Canon","Fujifilm","Nikon","Lumix","Quay nhỏ gọn & khác"];
 
-/* ========= THIẾT BỊ =========
-   img = tên file (không đuôi) trong thư mục images/ ; png:true = PNG nền trong suốt (máy đen) ; price: null → Liên hệ báo giá */
+/* ========= THIẾT BỊ =========*/
 const DEVICES=[
  {b:"Sony",n:"Sony A7 IV",img:"05-sony-a7-iv",png:1,spec:"Full-Frame 33MP · BIONZ XR · 4K 60p · chống rung 5 trục",hl:"Real-time Eye AF; ISO 100–51.200; chụp + quay đa dụng.",use:"Cưới, sự kiện, commercial",needs:["event","premium"],price:PRICES.Sony["A7 IV"]},
  {b:"Sony",n:"Sony A7S III",img:"06-sony-a7s-iii",png:1,spec:"Full-Frame 12.1MP · 4K 120p · 10-bit 4:2:2 · ISO tối đa 409.600",hl:"Tối ưu quay thiếu sáng; Dynamic Range 15+ stop.",use:"Quay phim chuyên nghiệp, thiếu sáng",needs:["premium"],price:null},
@@ -730,7 +729,7 @@ const DEVICES=[
  {b:"Canon",n:"Canon R10",img:"13-canon-r10",spec:"APS-C 24.2MP · 15fps màn trập cơ · 4K 30p",hl:"Nhỏ gọn, thao tác đơn giản; hợp người mới nâng cấp.",use:"Chụp, quay, du lịch, lifestyle",needs:["travel","street","vlog"],price:PRICES.Canon["R10"]},
  {b:"Canon",n:"Canon G7 X Mark III",img:"14-canon-g7x-iii",spec:"Cảm biến 1-inch 20.1MP · lens 24–100mm eq. F1.8–2.8 · 4K",hl:"Nhỏ gọn, khẩu độ lớn.",use:"Vlog, TikTok, du lịch, lifestyle, content",needs:["vlog","travel","street"],price:PRICES.Canon["G7 X Mark III"]},
  {b:"Canon",n:"Canon R100",img:"15-canon-r100",spec:"APS-C 24.1MP · DIGIC 8 · 4K 24p",hl:"Gọn nhẹ, đơn giản, hợp người mới.",use:"Du lịch, đời thường, chân dung, quay cơ bản",needs:["travel","portrait","event"],price:PRICES.Canon["R100"]},
- {b:"Canon",n:"Canon EOS R5",img:"",spec:"Chưa cập nhật thông số",hl:"Dòng cao cấp cho cưới/sự kiện và dự án thương mại.",use:"Cưới, sự kiện, thương mại",needs:["event","premium"],price:null},
+ {b:"Canon",n:"Canon EOS R5",img:"canon-eos-r5",spec:"Full-frame 45MP · DIGIC X · 8K 30p / 4K 120p",hl:"Dòng cao cấp cho cưới/sự kiện và dự án thương mại.",use:"Cưới, sự kiện, thương mại",needs:["event","premium"],price:null},
  {b:"Fujifilm",n:"Fujifilm XA2",img:"16-fujifilm-xa2",spec:"APS-C 16.3MP · màn hình lật · Hybrid AF",hl:"Nhỏ gọn; màu ảnh đặc trưng Fujifilm.",use:"Chân dung, đời thường, lifestyle, du lịch",needs:["portrait","travel","street"],price:PRICES.Fujifilm["XA2"]},
  {b:"Fujifilm",n:"Fujifilm X-T100",img:"17-fujifilm-x-t100",spec:"APS-C 24.2MP · màn hình xoay lật · 4K",hl:"Thiết kế đẹp, dễ dùng, hợp người mới.",use:"Du lịch, đời thường, chân dung, lifestyle",needs:["travel","portrait","street"],price:PRICES.Fujifilm["X-T100"]},
  {b:"Fujifilm",n:"Fujifilm XT10",img:"18-fujifilm-xt10",spec:"APS-C 16.3MP · X-Trans CMOS II · kính ngắm điện tử",hl:"Thiết kế hoài cổ, màu ảnh đặc trưng.",use:"Street, lifestyle, du lịch",needs:["vlog","street","travel"],price:PRICES.Fujifilm["XT10"]},
