@@ -766,7 +766,7 @@ const RATES=[
 /* tra giá 1 ngày theo tên thiết bị (khớp tên đầy đủ hoặc tên khác) */
 const RATE_IDX={};RATES.forEach(g=>g.rows.forEach(r=>{RATE_IDX[r[0]]=r;if(r[6])RATE_IDX[r[6]]=r}));
 const rate1=n=>RATE_IDX[n]?RATE_IDX[n][3]:null;
-const NEEDS={vlog:"Vlog/TikTok",portrait:"Chân dung",travel:"Du lịch",product:"Sản phẩm",event:"Cưới/Sự kiện",premium:"Cao cấp/Thương mại",street:"Street/Lifestyle"};
+const NEEDS={vlog:"Vlog/TikTok",portrait:"Chân dung",travel:"Du lịch",product:"Sản phẩm",event:"Cưới/Sự kiện",street:"Street/Lifestyle"};
 const BRANDS=["Sony","Canon","Fujifilm","Nikon","Lumix","Quay nhỏ gọn & khác"];
 
 /* ========= THIẾT BỊ =========*/
