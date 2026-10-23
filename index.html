@@ -153,6 +153,15 @@ nav.menu a:hover,nav.menu a.on{background:rgba(255,255,255,.65)}
 .pt h3:first-child{margin-top:0}
 .pr{display:flex;justify-content:space-between;gap:12px;padding:8px 4px;border-bottom:1px dashed rgba(69,78,47,.2);font-weight:600}
 .pr b{color:var(--berry-d);white-space:nowrap}
+.rt-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rt{width:100%;border-collapse:collapse;font-size:.88rem}
+.rt th{font-family:'Baloo 2','Quicksand',system-ui,sans-serif;font-weight:700;font-size:.78rem;color:#fff;background:var(--berry-d);padding:7px 6px;text-align:right;white-space:nowrap}
+.rt th:first-child{text-align:left;padding-left:10px;border-radius:12px 0 0 12px}
+.rt th:last-child{border-radius:0 12px 12px 0}
+.rt td{padding:8px 6px;text-align:right;white-space:nowrap;font-weight:700;color:var(--berry-d);border-bottom:1px dashed rgba(69,78,47,.2)}
+.rt td:first-child{text-align:left;white-space:normal;min-width:104px;padding-left:10px;font-weight:600;color:var(--ink)}
+.rt tbody tr:last-child td{border-bottom:0}
+@media(max-width:560px){.pt{padding:12px 8px}.rt{font-size:.72rem}.rt th{font-size:.62rem;padding:6px 2px}.rt th:first-child,.rt td:first-child{padding-left:4px}.rt td{padding:6px 2px}.rt td:first-child{min-width:0;width:30%}}
 /* steps */
 .steps{display:grid;gap:14px;counter-reset:s}
 .step{padding:16px 18px 16px 70px;position:relative}
@@ -307,6 +316,7 @@ html[data-theme=dark] .ph.png{background:radial-gradient(circle at 50% 55%,#F1EB
 html[data-theme=dark] .price,html[data-theme=dark] .slogan,html[data-theme=dark] .combo-from,html[data-theme=dark] .pr b{color:#C5D08A}
 html[data-theme=dark] .hero h1 em{background-image:linear-gradient(90deg,#C9D58E,#E6D9A0)}
 html[data-theme=dark] .pr{border-bottom-color:rgba(255,255,255,.18)}
+html[data-theme=dark] .rt td{color:#C5D08A;border-bottom-color:rgba(255,255,255,.18)}html[data-theme=dark] .rt td:first-child{color:var(--ink)}
 html[data-theme=dark] .err{color:#FF9E8A}
 html[data-theme=dark] nav.menu a:hover,html[data-theme=dark] nav.menu a.on,html[data-theme=dark] .drawer a:hover,html[data-theme=dark] .bnav a:hover,html[data-theme=dark] .burger{background:rgba(255,255,255,.12)}
 html[data-theme=dark] .modal{background:rgba(6,9,3,.60)}
@@ -555,7 +565,7 @@ nav.menu{display:none!important}
 <!-- PRICING -->
 <section id="pricing" data-pg="pricing">
  <div class="wrap">
-  <div class="sec-h rev"><h2>🏷️ Bảng giá tham khảo</h2><p>Đơn vị: K = nghìn đồng/ngày. Khoảng giá thấp nhất áp dụng cho thuê dài ngày / gói ngắn, cao nhất cho 1 ngày lẻ. Giá thuê đã gồm lens kit + fullset phụ kiện.</p></div>
+  <div class="sec-h rev"><h2>🏷️ Bảng giá tham khảo</h2><p>Đơn vị: K = nghìn đồng, TR = triệu đồng. Giá theo từng gói thời gian thuê: 6 tiếng, 10 tiếng, 1 ngày, 2 ngày, 3 ngày. Giá thuê đã gồm lens kit + fullset phụ kiện.</p></div>
   <div class="grid c2" id="priceGrid"></div>
   <p class="note" style="text-align:center;margin-top:16px">Giá tham khảo, có thể thay đổi theo tình trạng thiết bị và thời điểm thuê. Thuê nhiều ngày được ưu đãi tốt hơn — gửi yêu cầu để nhận báo giá.</p>
  </div>
@@ -705,41 +715,84 @@ const CONFIG={
   web3formsKey:"7a03bc6b-0f59-4aa6-a976-dc52d27d1503"
 };
 
-/* ========= DỮ LIỆU GIÁ (sửa một chỗ duy nhất) – đơn vị K/ngày, mặc định theo mục Bảng giá ========= */
-const PRICES={
- "Canon":{"M10":"90K–350K","M50":"110K–500K","R50":"140K–550K","R6 Mark II":"350K–1.200K","R10":"250K–900K","G7 X Mark III":"200K–850K","R100":"110K–500K"},
- "Fujifilm":{"XA2":"110K–500K","X-T100":"110K–500K","XT10":"110K–500K","XT20":"140K–550K","XT30":"160K–650K","X100T":"140K–550K"},
- "Sony":{"A6700":"300K–1.100K","A7 IV":"450K–1.600K","A6400":"180K–700K","A6000":"90K–340K","ZV-E10":"150K–600K"},
- "Quay chụp":{"DJI Osmo Pocket 3":"90K–380K","GoPro Hero 12":"90K–380K","DJI Osmo Pocket 2":"70K–280K"},
- "Phụ kiện / Lens":{"Sigma 18–50mm F2.8":"100K–480K","Canon RF 50mm F1.8":"60K–250K","Godox TT600":"80K–350K","Tripod F360":"40K–150K"}
-};
+/* ========= BẢNG GIÁ THUÊ (theo file "Bảng giá thuê" Timelens) – sửa một chỗ duy nhất =========
+   Mỗi dòng: [tên thiết bị, 6 tiếng, 10 tiếng, 1 ngày, 2 ngày, 3 ngày, (tên khác để khớp với thẻ máy)]
+   K = nghìn đồng, TR = triệu đồng. Giá hiển thị trên thẻ máy = cột "1 ngày". */
+const RATE_COLS=["6 tiếng","10 tiếng","1 ngày","2 ngày","3 ngày"];
+const RATES=[
+ {g:"Canon",rows:[
+  ["Canon M10","90K","130K","180K","350K","420K"],
+  ["Canon M3","130K","170K","230K","430K","650K"],
+  ["Canon M50","110K","150K","220K","420K","500K"],
+  ["Canon R50","180K","220K","280K","520K","750K"],
+  ["Canon R100","150K","190K","240K","420K","620K"],
+  ["Canon R10","200K","250K","320K","600K","850K"],
+  ["Canon G7 X Mark III","170K","230K","300K","620K","900K"],
+  ["Canon R6 Mark II","450K","550K","750K","1.45TR","2TR"],
+  ["Canon 80D / 70D","140K","180K","250K","480K","650K"]]},
+ {g:"Fujifilm",rows:[
+  ["Fujifilm X-M5 (Hot)","180K","230K","300K","550K","800K","Fujifilm X-M5"],
+  ["Fujifilm X-S20","320K","400K","500K","950K","1.4TR"],
+  ["Fujifilm X-S10","230K","280K","400K","700K","1TR"],
+  ["Fujifilm X100V","320K","400K","500K","950K","1.4TR"],
+  ["Fujifilm X-T30 / X-T30 II","190K","240K","320K","590K","850K","Fujifilm XT30"],
+  ["Fujifilm X-T100","180K","210K","240K","450K","660K"],
+  ["Fujifilm XT20","140K","180K","250K","480K","550K"],
+  ["Fujifilm XT10","110K","150K","200K","380K","500K"],
+  ["Fujifilm X100T","140K","180K","250K","480K","550K"],
+  ["Fujifilm XA2 / XA3","110K","150K","200K","380K","500K","Fujifilm XA2"]]},
+ {g:"Sony",rows:[
+  ["Sony A6000 / A5100","90K","130K","180K","340K","450K","Sony A6000"],
+  ["Sony ZV-E10","150K","210K","300K","580K","600K"],
+  ["Sony A6400","180K","220K","300K","550K","800K"],
+  ["Sony A6700","280K","350K","450K","850K","1.2TR"],
+  ["Sony A7 IV","450K","550K","700K","1.35TR","2TR"]]},
+ {g:"Nikon",rows:[
+  ["Nikon Z30","180K","220K","280K","520K","750K"],
+  ["Nikon Z50","200K","250K","320K","600K","850K"],
+  ["Nikon Z fc","220K","270K","350K","650K","900K"]]},
+ {g:"Lumix / Panasonic",rows:[
+  ["Lumix G7","120K","160K","220K","400K","550K"],
+  ["Lumix GH5","220K","280K","380K","700K","980K"]]},
+ {g:"Quay chụp hành trình & phụ kiện rời",rows:[
+  ["DJI Osmo Pocket 3","120K","150K","200K","380K","550K"],
+  ["DJI Osmo Pocket 2","80K","110K","150K","280K","400K"],
+  ["GoPro Hero 12","120K","150K","200K","380K","550K"],
+  ["Lens Sigma 18–50mm F2.8","100K","140K","200K","380K","480K","Sigma 18–50mm F2.8"],
+  ["Lens Canon RF 50mm F1.8","60K","90K","130K","200K","250K","Canon RF 50mm F1.8"],
+  ["Đèn Flash Godox TT600","80K","110K","160K","280K","350K","Godox TT600"],
+  ["Chân máy Tripod F360","40K","60K","80K","120K","150K","Tripod F360"]]}
+];
+/* tra giá 1 ngày theo tên thiết bị (khớp tên đầy đủ hoặc tên khác) */
+const RATE_IDX={};RATES.forEach(g=>g.rows.forEach(r=>{RATE_IDX[r[0]]=r;if(r[6])RATE_IDX[r[6]]=r}));
+const rate1=n=>RATE_IDX[n]?RATE_IDX[n][3]:null;
 const NEEDS={vlog:"Vlog/TikTok",portrait:"Chân dung",travel:"Du lịch",product:"Sản phẩm",event:"Cưới/Sự kiện",premium:"Cao cấp/Thương mại",street:"Street/Lifestyle"};
 const BRANDS=["Sony","Canon","Fujifilm","Nikon","Lumix","Quay nhỏ gọn & khác"];
 
 /* ========= THIẾT BỊ =========*/
 const DEVICES=[
- {b:"Sony",n:"Sony A7 IV",img:"05-sony-a7-iv",png:1,spec:"Full-Frame 33MP · BIONZ XR · 4K 60p · chống rung 5 trục",hl:"Real-time Eye AF; ISO 100–51.200; chụp + quay đa dụng.",use:"Cưới, sự kiện, commercial",needs:["event","premium"],price:PRICES.Sony["A7 IV"]},
+ {b:"Sony",n:"Sony A7 IV",img:"05-sony-a7-iv",png:1,spec:"Full-Frame 33MP · BIONZ XR · 4K 60p · chống rung 5 trục",hl:"Real-time Eye AF; ISO 100–51.200; chụp + quay đa dụng.",use:"Cưới, sự kiện, commercial",needs:["event","premium"],price:null},
  {b:"Sony",n:"Sony A7S III",img:"06-sony-a7s-iii",png:1,spec:"Full-Frame 12.1MP · 4K 120p · 10-bit 4:2:2 · ISO tối đa 409.600",hl:"Tối ưu quay thiếu sáng; Dynamic Range 15+ stop.",use:"Quay phim chuyên nghiệp, thiếu sáng",needs:["premium"],price:null},
- {b:"Sony",n:"Sony A6700",img:"07-sony-a6700",png:1,spec:"APS-C 26MP · AI Processing Unit · 4K 120p",hl:"Nhận diện người/xe/động vật; nhỏ gọn; hợp vlog, du lịch, video.",use:"Vlog, TikTok, du lịch, video 4K",needs:["vlog","travel"],price:PRICES.Sony["A6700"]},
+ {b:"Sony",n:"Sony A6700",img:"07-sony-a6700",png:1,spec:"APS-C 26MP · AI Processing Unit · 4K 120p",hl:"Nhận diện người/xe/động vật; nhỏ gọn; hợp vlog, du lịch, video.",use:"Vlog, TikTok, du lịch, video 4K",needs:["vlog","travel"],price:null},
  {b:"Sony",n:"Sony A7R V",img:"08-sony-a7r-v",png:1,spec:"Full-Frame 61MP · lấy nét AI · chống rung 8 stop",hl:"Độ phân giải cao; hợp thương mại, thời trang, chân dung, in khổ lớn.",use:"Thương mại, thời trang, chân dung",needs:["premium"],price:null},
- {b:"Sony",n:"Sony A6400",img:"37-sony-a6400",spec:"APS-C 24.2MP · Real-time Eye AF · 4K · màn hình lật",hl:"Cân bằng giữa chụp và quay 4K, lấy nét mắt nhanh.",use:"Chân dung, vlog, sự kiện, quay 4K",needs:["portrait","vlog","product"],price:PRICES.Sony["A6400"]},
- {b:"Sony",n:"Sony A6000",img:"38-sony-a6000",spec:"APS-C 24.3MP · AF lai · Full HD · thân nhỏ gọn",hl:"Nhỏ gọn, giá dễ chịu, hợp người mới.",use:"Chân dung, street, du lịch",needs:["portrait","travel","street"],price:PRICES.Sony["A6000"]},
- {b:"Sony",n:"Sony ZV-E10",img:"39-sony-zv-e10",spec:"APS-C 24.2MP · 4K · màn hình lật",hl:"Thiết kế hướng tới vlog, dễ dùng.",use:"Vlog, TikTok, content",needs:["vlog","travel"],price:PRICES.Sony["ZV-E10"]},
- {b:"Canon",n:"Canon M10",img:"09-canon-m10",spec:"APS-C 18MP · Dual Pixel CMOS AF · Full HD",hl:"Nhỏ gọn, dễ dùng, hợp người mới.",use:"Đời thường, chân dung, du lịch, lifestyle",needs:["portrait","travel","street"],price:PRICES.Canon["M10"]},
- {b:"Canon",n:"Canon M50",img:"10-canon-m50",spec:"APS-C 24.1MP · Dual Pixel CMOS AF · 4K",hl:"Màn hình xoay lật; lấy nét nhanh.",use:"Chân dung, lifestyle, vlog, du lịch",needs:["portrait","vlog","travel","street"],price:PRICES.Canon["M50"]},
+ {b:"Sony",n:"Sony A6400",img:"37-sony-a6400",spec:"APS-C 24.2MP · Real-time Eye AF · 4K · màn hình lật",hl:"Cân bằng giữa chụp và quay 4K, lấy nét mắt nhanh.",use:"Chân dung, vlog, sự kiện, quay 4K",needs:["portrait","vlog","product"],price:null},
+ {b:"Sony",n:"Sony A6000",img:"38-sony-a6000",spec:"APS-C 24.3MP · AF lai · Full HD · thân nhỏ gọn",hl:"Nhỏ gọn, giá dễ chịu, hợp người mới.",use:"Chân dung, street, du lịch",needs:["portrait","travel","street"],price:null},
+ {b:"Sony",n:"Sony ZV-E10",img:"39-sony-zv-e10",spec:"APS-C 24.2MP · 4K · màn hình lật",hl:"Thiết kế hướng tới vlog, dễ dùng.",use:"Vlog, TikTok, content",needs:["vlog","travel"],price:null},
+ {b:"Canon",n:"Canon M10",img:"09-canon-m10",spec:"APS-C 18MP · Dual Pixel CMOS AF · Full HD",hl:"Nhỏ gọn, dễ dùng, hợp người mới.",use:"Đời thường, chân dung, du lịch, lifestyle",needs:["portrait","travel","street"],price:null},
+ {b:"Canon",n:"Canon M50",img:"10-canon-m50",spec:"APS-C 24.1MP · Dual Pixel CMOS AF · 4K",hl:"Màn hình xoay lật; lấy nét nhanh.",use:"Chân dung, lifestyle, vlog, du lịch",needs:["portrait","vlog","travel","street"],price:null},
  {b:"Canon",n:"Canon M3",img:"31-canon-m3",spec:"APS-C 24.2MP · DIGIC 6 · Full HD",hl:"Gọn nhẹ, dễ mang theo.",use:"Đời thường, du lịch",needs:["travel","street"],price:"130K–650K"},
- {b:"Canon",n:"Canon R50",img:"11-canon-r50",spec:"APS-C 24.2MP · Dual Pixel CMOS AF II · 4K",hl:"Nhỏ gọn, lấy nét nhanh, dễ dùng; hợp người mới & sáng tạo nội dung.",use:"Chụp, quay, vlog, TikTok, du lịch",needs:["vlog","portrait","travel","product"],price:PRICES.Canon["R50"]},
- {b:"Canon",n:"Canon R6 Mark II",img:"12-canon-r6-ii",spec:"Full-Frame 24.2MP · chụp 40fps · 4K 60p",hl:"Tốc độ cao, lấy nét nhanh, chất lượng ảnh tốt.",use:"Cưới, sự kiện, thể thao, commercial, quay video",needs:["event","premium"],price:PRICES.Canon["R6 Mark II"]},
- {b:"Canon",n:"Canon R10",img:"13-canon-r10",spec:"APS-C 24.2MP · 15fps màn trập cơ · 4K 30p",hl:"Nhỏ gọn, thao tác đơn giản; hợp người mới nâng cấp.",use:"Chụp, quay, du lịch, lifestyle",needs:["travel","street","vlog"],price:PRICES.Canon["R10"]},
- {b:"Canon",n:"Canon G7 X Mark III",img:"14-canon-g7x-iii",spec:"Cảm biến 1-inch 20.1MP · lens 24–100mm eq. F1.8–2.8 · 4K",hl:"Nhỏ gọn, khẩu độ lớn.",use:"Vlog, TikTok, du lịch, lifestyle, content",needs:["vlog","travel","street"],price:PRICES.Canon["G7 X Mark III"]},
- {b:"Canon",n:"Canon R100",img:"15-canon-r100",spec:"APS-C 24.1MP · DIGIC 8 · 4K 24p",hl:"Gọn nhẹ, đơn giản, hợp người mới.",use:"Du lịch, đời thường, chân dung, quay cơ bản",needs:["travel","portrait","event"],price:PRICES.Canon["R100"]},
+ {b:"Canon",n:"Canon R50",img:"11-canon-r50",spec:"APS-C 24.2MP · Dual Pixel CMOS AF II · 4K",hl:"Nhỏ gọn, lấy nét nhanh, dễ dùng; hợp người mới & sáng tạo nội dung.",use:"Chụp, quay, vlog, TikTok, du lịch",needs:["vlog","portrait","travel","product"],price:null},
+ {b:"Canon",n:"Canon R6 Mark II",img:"12-canon-r6-ii",spec:"Full-Frame 24.2MP · chụp 40fps · 4K 60p",hl:"Tốc độ cao, lấy nét nhanh, chất lượng ảnh tốt.",use:"Cưới, sự kiện, thể thao, commercial, quay video",needs:["event","premium"],price:null},
+ {b:"Canon",n:"Canon R10",img:"13-canon-r10",spec:"APS-C 24.2MP · 15fps màn trập cơ · 4K 30p",hl:"Nhỏ gọn, thao tác đơn giản; hợp người mới nâng cấp.",use:"Chụp, quay, du lịch, lifestyle",needs:["travel","street","vlog"],price:null},
+ {b:"Canon",n:"Canon G7 X Mark III",img:"14-canon-g7x-iii",spec:"Cảm biến 1-inch 20.1MP · lens 24–100mm eq. F1.8–2.8 · 4K",hl:"Nhỏ gọn, khẩu độ lớn.",use:"Vlog, TikTok, du lịch, lifestyle, content",needs:["vlog","travel","street"],price:null},
+ {b:"Canon",n:"Canon R100",img:"15-canon-r100",spec:"APS-C 24.1MP · DIGIC 8 · 4K 24p",hl:"Gọn nhẹ, đơn giản, hợp người mới.",use:"Du lịch, đời thường, chân dung, quay cơ bản",needs:["travel","portrait","event"],price:null},
  {b:"Canon",n:"Canon EOS R5",img:"canon-eos-r5",spec:"Full-frame 45MP · DIGIC X · 8K 30p / 4K 120p",hl:"Dòng cao cấp cho cưới/sự kiện và dự án thương mại.",use:"Cưới, sự kiện, thương mại",needs:["event","premium"],price:null},
- {b:"Fujifilm",n:"Fujifilm XA2",img:"16-fujifilm-xa2",spec:"APS-C 16.3MP · màn hình lật · Hybrid AF",hl:"Nhỏ gọn; màu ảnh đặc trưng Fujifilm.",use:"Chân dung, đời thường, lifestyle, du lịch",needs:["portrait","travel","street"],price:PRICES.Fujifilm["XA2"]},
- {b:"Fujifilm",n:"Fujifilm X-T100",img:"17-fujifilm-x-t100",spec:"APS-C 24.2MP · màn hình xoay lật · 4K",hl:"Thiết kế đẹp, dễ dùng, hợp người mới.",use:"Du lịch, đời thường, chân dung, lifestyle",needs:["travel","portrait","street"],price:PRICES.Fujifilm["X-T100"]},
- {b:"Fujifilm",n:"Fujifilm XT10",img:"18-fujifilm-xt10",spec:"APS-C 16.3MP · X-Trans CMOS II · kính ngắm điện tử",hl:"Thiết kế hoài cổ, màu ảnh đặc trưng.",use:"Street, lifestyle, du lịch",needs:["vlog","street","travel"],price:PRICES.Fujifilm["XT10"]},
- {b:"Fujifilm",n:"Fujifilm XT20",img:"19-fujifilm-xt20",spec:"APS-C 24.3MP · X-Trans CMOS III · 4K",hl:"Màu film đẹp, chụp chân dung rất ưng.",use:"Chân dung, street, lifestyle, du lịch",needs:["portrait","street","travel"],price:PRICES.Fujifilm["XT20"]},
- {b:"Fujifilm",n:"Fujifilm XT30",img:"20-fujifilm-xt30",spec:"APS-C 26.1MP · X-Processor 4 · 4K DCI",hl:"Lấy nét nhanh, nhỏ gọn, màu đặc trưng; chụp lẫn quay.",use:"Street, lifestyle, chân dung, du lịch",needs:["portrait","street","travel","vlog"],price:PRICES.Fujifilm["XT30"]},
- {b:"Fujifilm",n:"Fujifilm X100T",img:"21-fujifilm-x100t",spec:"APS-C 16.3MP · lens cố định 23mm F2 · kính ngắm lai",hl:"Compact, hợp đường phố.",use:"Street, đời thường",needs:["street","travel"],price:PRICES.Fujifilm["X100T"]},
+ {b:"Fujifilm",n:"Fujifilm XA2",img:"16-fujifilm-xa2",spec:"APS-C 16.3MP · màn hình lật · Hybrid AF",hl:"Nhỏ gọn; màu ảnh đặc trưng Fujifilm.",use:"Chân dung, đời thường, lifestyle, du lịch",needs:["portrait","travel","street"],price:null},
+ {b:"Fujifilm",n:"Fujifilm X-T100",img:"17-fujifilm-x-t100",spec:"APS-C 24.2MP · màn hình xoay lật · 4K",hl:"Thiết kế đẹp, dễ dùng, hợp người mới.",use:"Du lịch, đời thường, chân dung, lifestyle",needs:["travel","portrait","street"],price:null},
+ {b:"Fujifilm",n:"Fujifilm XT10",img:"18-fujifilm-xt10",spec:"APS-C 16.3MP · X-Trans CMOS II · kính ngắm điện tử",hl:"Thiết kế hoài cổ, màu ảnh đặc trưng.",use:"Street, lifestyle, du lịch",needs:["vlog","street","travel"],price:null},
+ {b:"Fujifilm",n:"Fujifilm XT20",img:"19-fujifilm-xt20",spec:"APS-C 24.3MP · X-Trans CMOS III · 4K",hl:"Màu film đẹp, chụp chân dung rất ưng.",use:"Chân dung, street, lifestyle, du lịch",needs:["portrait","street","travel"],price:null},
+ {b:"Fujifilm",n:"Fujifilm XT30",img:"20-fujifilm-xt30",spec:"APS-C 26.1MP · X-Processor 4 · 4K DCI",hl:"Lấy nét nhanh, nhỏ gọn, màu đặc trưng; chụp lẫn quay.",use:"Street, lifestyle, chân dung, du lịch",needs:["portrait","street","travel","vlog"],price:null},
+ {b:"Fujifilm",n:"Fujifilm X100T",img:"21-fujifilm-x100t",spec:"APS-C 16.3MP · lens cố định 23mm F2 · kính ngắm lai",hl:"Compact, hợp đường phố.",use:"Street, đời thường",needs:["street","travel"],price:null},
  {b:"Fujifilm",n:"Fujifilm X100V",img:"36-x100v",spec:"APS-C 26.1MP · lens cố định 23mm F2 · màn hình cảm ứng xoay lật",hl:"Nhỏ gọn, ống kính cố định chất lượng.",use:"Street, lifestyle, du lịch",needs:["street","travel"],price:"300K–1,2M"},
  {b:"Fujifilm",n:"Fujifilm X-M5",img:"40-x-m5",spec:"APS-C 26.1MP · nhỏ gọn · 6.2K/30p",hl:"Hợp làm content, mang theo dễ dàng.",use:"Content, du lịch",needs:["travel","vlog"],price:"200K–250K"},
  {b:"Fujifilm",n:"Fujifilm XA7",img:"fujifilm-xa7",spec:"APS-C 24.2MP · AF nhận diện mắt · 4K 30p",hl:"Màu film sẵn đẹp, hợp du lịch & đời thường.",use:"Du lịch, đời thường",needs:["travel","street"],price:null},
@@ -749,19 +802,21 @@ const DEVICES=[
  {b:"Nikon",n:"Nikon Z fc",img:"24-nikon-z-fc",spec:"APS-C 20.9MP · màn hình xoay lật · thiết kế kiểu FM2 · ngàm Z",hl:"Hoài cổ, hợp street, lifestyle, du lịch.",use:"Street, lifestyle, du lịch",needs:["street","travel"],price:null},
  {b:"Lumix",n:"Lumix S5 II",img:"25-lumix-s5-ii",spec:"Full-Frame 24.2MP · PDAF · quạt tản nhiệt · Active I.S.",hl:"Quay video dài; hợp production & content.",use:"Production, content",needs:["premium","vlog"],price:null},
  {b:"Lumix",n:"Lumix GH6",img:"26-lumix-gh6",spec:"Micro Four Thirds 25.2MP · 5.7K 60p · Apple ProRes",hl:"Ghi ProRes HQ trực tiếp vào thẻ; hợp quay video chuyên sâu.",use:"Quay video chuyên sâu",needs:["premium"],price:null},
- {b:"Quay nhỏ gọn & khác",n:"DJI Osmo Pocket 3",img:"27-dji-osmo-pocket-3",spec:"Cảm biến 1-inch CMOS · gimbal 3 trục · OLED 2-inch · video dọc native",hl:"Chống rung cơ học, bỏ túi.",use:"Vlog, TikTok, du lịch",needs:["vlog","travel"],price:PRICES["Quay chụp"]["DJI Osmo Pocket 3"]},
- {b:"Quay nhỏ gọn & khác",n:"DJI Osmo Pocket 2",img:"41-dji-osmo-pocket-2",spec:"Cảm biến 1/1.7-inch · gimbal 3 trục · 4K/60p",hl:"Nhỏ xíu, mượt mà.",use:"Vlog, du lịch",needs:["vlog","travel"],price:PRICES["Quay chụp"]["DJI Osmo Pocket 2"]},
- {b:"Quay nhỏ gọn & khác",n:"GoPro Hero 12",img:"28-gopro-hero-12",spec:"Cảm biến 1/1.9 inch · 5.3K 60fps · chống nước 10m · HyperSmooth 6.0",hl:"Chống nước không cần vỏ, hợp hoạt động ngoài trời.",use:"Du lịch, thể thao, outdoor",needs:["travel"],price:PRICES["Quay chụp"]["GoPro Hero 12"]},
+ {b:"Quay nhỏ gọn & khác",n:"DJI Osmo Pocket 3",img:"27-dji-osmo-pocket-3",spec:"Cảm biến 1-inch CMOS · gimbal 3 trục · OLED 2-inch · video dọc native",hl:"Chống rung cơ học, bỏ túi.",use:"Vlog, TikTok, du lịch",needs:["vlog","travel"],price:null},
+ {b:"Quay nhỏ gọn & khác",n:"DJI Osmo Pocket 2",img:"41-dji-osmo-pocket-2",spec:"Cảm biến 1/1.7-inch · gimbal 3 trục · 4K/60p",hl:"Nhỏ xíu, mượt mà.",use:"Vlog, du lịch",needs:["vlog","travel"],price:null},
+ {b:"Quay nhỏ gọn & khác",n:"GoPro Hero 12",img:"28-gopro-hero-12",spec:"Cảm biến 1/1.9 inch · 5.3K 60fps · chống nước 10m · HyperSmooth 6.0",hl:"Chống nước không cần vỏ, hợp hoạt động ngoài trời.",use:"Du lịch, thể thao, outdoor",needs:["travel"],price:null},
  {b:"Quay nhỏ gọn & khác",n:"Ricoh GR IIIx",img:"29-ricoh-gr-iiix",spec:"APS-C 24MP · ống kính 40mm F2.8 (≈35mm) · Snap Focus",hl:"Bỏ túi, hợp street & đời thường.",use:"Street, đời thường",needs:["street"],price:null}
 ];
 const ACCS=[
- {n:"Sigma 18–50mm F2.8",d:"Lens khẩu lớn, xóa phông, hợp chân dung & sản phẩm.",price:PRICES["Phụ kiện / Lens"]["Sigma 18–50mm F2.8"],img:"",e:"🔭"},
- {n:"Canon RF 50mm F1.8",d:"Lens tiêu cự 50mm cho chân dung xóa phông.",price:PRICES["Phụ kiện / Lens"]["Canon RF 50mm F1.8"],img:"",e:"👁️"},
- {n:"Godox TT600",d:"Flash rời, bổ trợ ánh sáng cho chụp sản phẩm.",price:PRICES["Phụ kiện / Lens"]["Godox TT600"],img:"",e:"⚡"},
- {n:"Tripod F360",d:"Chân máy ổn định cho quay/chụp.",price:PRICES["Phụ kiện / Lens"]["Tripod F360"],img:"",e:"📐"},
+ {n:"Sigma 18–50mm F2.8",d:"Lens khẩu lớn, xóa phông, hợp chân dung & sản phẩm.",price:null,img:"",e:"🔭"},
+ {n:"Canon RF 50mm F1.8",d:"Lens tiêu cự 50mm cho chân dung xóa phông.",price:null,img:"",e:"👁️"},
+ {n:"Godox TT600",d:"Flash rời, bổ trợ ánh sáng cho chụp sản phẩm.",price:null,img:"",e:"⚡"},
+ {n:"Tripod F360",d:"Chân máy ổn định cho quay/chụp.",price:null,img:"",e:"📐"},
  {n:"Gimbal chống rung",d:"Tùy chọn thêm vào combo.",price:null,e:"🎥"},
  {n:"Micro thu âm",d:"Tùy chọn thêm vào combo.",price:null,e:"🎙️"}
 ];
+/* đồng bộ giá thẻ máy / phụ kiện với Bảng giá (cột "1 ngày"); máy chưa có trong bảng giá -> giữ nguyên */
+DEVICES.concat(ACCS).forEach(d=>{const r=rate1(d.n);if(r)d.price=r});
 
 /* ========= COMBO ========= */
 const COMBOS=[
@@ -980,7 +1035,7 @@ $("#accGrid").innerHTML=ACCS.map((a,i)=>`<article class="glass card hov"><div cl
 $("#accGrid").onclick=e=>{const b=e.target.closest("[data-a]");if(b)goBook(ACCS[+b.dataset.a].n)};
 
 /* ========= PRICING ========= */
-$("#priceGrid").innerHTML=Object.entries(PRICES).map(([g,o])=>`<div class="glass pt"><h3>${esc(g)}</h3>${Object.entries(o).map(([n,p])=>`<div class="pr"><span>${esc(n)}</span><b>${esc(p)}</b></div>`).join("")}</div>`).join("");
+$("#priceGrid").innerHTML=RATES.map(({g,rows})=>`<div class="glass pt"><h3>${esc(g)}</h3><div class="rt-wrap"><table class="rt"><thead><tr><th scope="col">Tên thiết bị</th>${RATE_COLS.map(c=>`<th scope="col">${c}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r[0])}</td>${r.slice(1,6).map(v=>`<td>${esc(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div>`).join("");
 
 /* ========= ADVISOR ========= */
 $("#advForm").onsubmit=e=>{
