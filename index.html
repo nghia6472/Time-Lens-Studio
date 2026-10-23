@@ -772,9 +772,7 @@ const BRANDS=["Sony","Canon","Fujifilm","Nikon","Lumix","Quay nhỏ gọn & khá
 /* ========= THIẾT BỊ =========*/
 const DEVICES=[
  {b:"Sony",n:"Sony A7 IV",img:"05-sony-a7-iv",png:1,spec:"Full-Frame 33MP · BIONZ XR · 4K 60p · chống rung 5 trục",hl:"Real-time Eye AF; ISO 100–51.200; chụp + quay đa dụng.",use:"Cưới, sự kiện, commercial",needs:["event","premium"],price:null},
- {b:"Sony",n:"Sony A7S III",img:"06-sony-a7s-iii",png:1,spec:"Full-Frame 12.1MP · 4K 120p · 10-bit 4:2:2 · ISO tối đa 409.600",hl:"Tối ưu quay thiếu sáng; Dynamic Range 15+ stop.",use:"Quay phim chuyên nghiệp, thiếu sáng",needs:["premium"],price:null},
  {b:"Sony",n:"Sony A6700",img:"07-sony-a6700",png:1,spec:"APS-C 26MP · AI Processing Unit · 4K 120p",hl:"Nhận diện người/xe/động vật; nhỏ gọn; hợp vlog, du lịch, video.",use:"Vlog, TikTok, du lịch, video 4K",needs:["vlog","travel"],price:null},
- {b:"Sony",n:"Sony A7R V",img:"08-sony-a7r-v",png:1,spec:"Full-Frame 61MP · lấy nét AI · chống rung 8 stop",hl:"Độ phân giải cao; hợp thương mại, thời trang, chân dung, in khổ lớn.",use:"Thương mại, thời trang, chân dung",needs:["premium"],price:null},
  {b:"Sony",n:"Sony A6400",img:"37-sony-a6400",spec:"APS-C 24.2MP · Real-time Eye AF · 4K · màn hình lật",hl:"Cân bằng giữa chụp và quay 4K, lấy nét mắt nhanh.",use:"Chân dung, vlog, sự kiện, quay 4K",needs:["portrait","vlog","product"],price:null},
  {b:"Sony",n:"Sony A6000",img:"38-sony-a6000",spec:"APS-C 24.3MP · AF lai · Full HD · thân nhỏ gọn",hl:"Nhỏ gọn, giá dễ chịu, hợp người mới.",use:"Chân dung, street, du lịch",needs:["portrait","travel","street"],price:null},
  {b:"Sony",n:"Sony ZV-E10",img:"39-sony-zv-e10",spec:"APS-C 24.2MP · 4K · màn hình lật",hl:"Thiết kế hướng tới vlog, dễ dùng.",use:"Vlog, TikTok, content",needs:["vlog","travel"],price:null},
@@ -786,7 +784,6 @@ const DEVICES=[
  {b:"Canon",n:"Canon R10",img:"13-canon-r10",spec:"APS-C 24.2MP · 15fps màn trập cơ · 4K 30p",hl:"Nhỏ gọn, thao tác đơn giản; hợp người mới nâng cấp.",use:"Chụp, quay, du lịch, lifestyle",needs:["travel","street","vlog"],price:null},
  {b:"Canon",n:"Canon G7 X Mark III",img:"14-canon-g7x-iii",spec:"Cảm biến 1-inch 20.1MP · lens 24–100mm eq. F1.8–2.8 · 4K",hl:"Nhỏ gọn, khẩu độ lớn.",use:"Vlog, TikTok, du lịch, lifestyle, content",needs:["vlog","travel","street"],price:null},
  {b:"Canon",n:"Canon R100",img:"15-canon-r100",spec:"APS-C 24.1MP · DIGIC 8 · 4K 24p",hl:"Gọn nhẹ, đơn giản, hợp người mới.",use:"Du lịch, đời thường, chân dung, quay cơ bản",needs:["travel","portrait","event"],price:null},
- {b:"Canon",n:"Canon EOS R5",img:"canon-eos-r5",spec:"Full-frame 45MP · DIGIC X · 8K 30p / 4K 120p",hl:"Dòng cao cấp cho cưới/sự kiện và dự án thương mại.",use:"Cưới, sự kiện, thương mại",needs:["event","premium"],price:null},
  {b:"Fujifilm",n:"Fujifilm XA2",img:"16-fujifilm-xa2",spec:"APS-C 16.3MP · màn hình lật · Hybrid AF",hl:"Nhỏ gọn; màu ảnh đặc trưng Fujifilm.",use:"Chân dung, đời thường, lifestyle, du lịch",needs:["portrait","travel","street"],price:null},
  {b:"Fujifilm",n:"Fujifilm X-T100",img:"17-fujifilm-x-t100",spec:"APS-C 24.2MP · màn hình xoay lật · 4K",hl:"Thiết kế đẹp, dễ dùng, hợp người mới.",use:"Du lịch, đời thường, chân dung, lifestyle",needs:["travel","portrait","street"],price:null},
  {b:"Fujifilm",n:"Fujifilm XT10",img:"18-fujifilm-xt10",spec:"APS-C 16.3MP · X-Trans CMOS II · kính ngắm điện tử",hl:"Thiết kế hoài cổ, màu ảnh đặc trưng.",use:"Street, lifestyle, du lịch",needs:["vlog","street","travel"],price:null},
@@ -797,15 +794,12 @@ const DEVICES=[
  {b:"Fujifilm",n:"Fujifilm X-M5",img:"40-x-m5",spec:"APS-C 26.1MP · nhỏ gọn · 6.2K/30p",hl:"Hợp làm content, mang theo dễ dàng.",use:"Content, du lịch",needs:["travel","vlog"],price:"200K–250K"},
  {b:"Fujifilm",n:"Fujifilm XA7",img:"fujifilm-xa7",spec:"APS-C 24.2MP · AF nhận diện mắt · 4K 30p",hl:"Màu film sẵn đẹp, hợp du lịch & đời thường.",use:"Du lịch, đời thường",needs:["travel","street"],price:null},
  {b:"Fujifilm",n:"Fujifilm X-S10",img:"fujifilm-xs10",spec:"APS-C 26.1MP · IBIS 5 trục · 4K 30p",hl:"Gợi ý trong FAQ cho chụp chân dung.",use:"Chân dung",needs:["portrait"],price:null},
- {b:"Nikon",n:"Nikon Z6 II",img:"22-nikon-z6-ii",spec:"Full-Frame 24.5MP · 2 chip EXPEED 6 · 2 khe thẻ · thân magnesium chống thời tiết",hl:"Bền bỉ, đa dụng.",use:"Ảnh & video chuyên nghiệp",needs:["event","premium"],price:null},
- {b:"Nikon",n:"Nikon Z8",img:"23-nikon-z8",spec:"Full-Frame Stacked 45.7MP · màn trập điện tử · 8K",hl:"Gần flagship Z9 nhưng nhỏ gọn hơn; hợp ảnh/video chuyên nghiệp.",use:"Dự án chuyên nghiệp",needs:["premium"],price:null},
  {b:"Nikon",n:"Nikon Z fc",img:"24-nikon-z-fc",spec:"APS-C 20.9MP · màn hình xoay lật · thiết kế kiểu FM2 · ngàm Z",hl:"Hoài cổ, hợp street, lifestyle, du lịch.",use:"Street, lifestyle, du lịch",needs:["street","travel"],price:null},
  {b:"Lumix",n:"Lumix S5 II",img:"25-lumix-s5-ii",spec:"Full-Frame 24.2MP · PDAF · quạt tản nhiệt · Active I.S.",hl:"Quay video dài; hợp production & content.",use:"Production, content",needs:["premium","vlog"],price:null},
  {b:"Lumix",n:"Lumix GH6",img:"26-lumix-gh6",spec:"Micro Four Thirds 25.2MP · 5.7K 60p · Apple ProRes",hl:"Ghi ProRes HQ trực tiếp vào thẻ; hợp quay video chuyên sâu.",use:"Quay video chuyên sâu",needs:["premium"],price:null},
  {b:"Quay nhỏ gọn & khác",n:"DJI Osmo Pocket 3",img:"27-dji-osmo-pocket-3",spec:"Cảm biến 1-inch CMOS · gimbal 3 trục · OLED 2-inch · video dọc native",hl:"Chống rung cơ học, bỏ túi.",use:"Vlog, TikTok, du lịch",needs:["vlog","travel"],price:null},
  {b:"Quay nhỏ gọn & khác",n:"DJI Osmo Pocket 2",img:"41-dji-osmo-pocket-2",spec:"Cảm biến 1/1.7-inch · gimbal 3 trục · 4K/60p",hl:"Nhỏ xíu, mượt mà.",use:"Vlog, du lịch",needs:["vlog","travel"],price:null},
  {b:"Quay nhỏ gọn & khác",n:"GoPro Hero 12",img:"28-gopro-hero-12",spec:"Cảm biến 1/1.9 inch · 5.3K 60fps · chống nước 10m · HyperSmooth 6.0",hl:"Chống nước không cần vỏ, hợp hoạt động ngoài trời.",use:"Du lịch, thể thao, outdoor",needs:["travel"],price:null},
- {b:"Quay nhỏ gọn & khác",n:"Ricoh GR IIIx",img:"29-ricoh-gr-iiix",spec:"APS-C 24MP · ống kính 40mm F2.8 (≈35mm) · Snap Focus",hl:"Bỏ túi, hợp street & đời thường.",use:"Street, đời thường",needs:["street"],price:null}
 ];
 const ACCS=[
  {n:"Sigma 18–50mm F2.8",d:"Lens khẩu lớn, xóa phông, hợp chân dung & sản phẩm.",price:null,img:"",e:"🔭"},
@@ -844,8 +838,7 @@ const MATCH=[
  {need:"Chân dung",e:"🧑‍🎨",dev:"Sony A6000, Sony A6400, Fujifilm XT20, Canon R50",blog:"4 combo chụp chân dung theo ngân sách",f:"portrait"},
  {need:"Du lịch",e:"🏝️",dev:"Sony A6000, Canon R50, Fujifilm X-M5, DJI Osmo Pocket 3, GoPro Hero 12",blog:"Mang gì cho chuyến đi 3 ngày?",f:"travel"},
  {need:"Sản phẩm",e:"🛍️",dev:"Sony A6400, Canon R50 + tripod/đèn/micro",blog:"Combo quay sản phẩm từ 250K/ngày",f:"product"},
- {need:"Cưới/sự kiện",e:"💍",dev:"Sony A7 IV, Canon R100, Canon EOS R5",blog:"Chọn máy full-frame cho sự kiện",f:"event"},
- {need:"Cao cấp/thương mại",e:"🏆",dev:"Sony A7R V, Canon EOS R5, Nikon Z8",blog:"Thiết bị hình ảnh cho dự án chuyên nghiệp",f:"premium"}
+ {need:"Cưới/sự kiện",e:"💍",dev:"Sony A7 IV, Canon R100",blog:"Chọn máy full-frame cho sự kiện",f:"event"},
 ];
 
 const STEPS=[["🎯","Chọn nhu cầu: quay phim, chân dung, sản phẩm, du lịch/khám phá."],["📷","Chọn máy hoặc combo và số ngày thuê."],["📅","Kiểm tra lịch trống và nhận báo giá."],["📝","Xác nhận thông tin, giấy tờ và tiền cọc theo chính sách."],["🎁","Nhận máy và kiểm tra body, lens, pin, thẻ nhớ, phụ kiện."],["🌟","Sử dụng; liên hệ Time Lens nếu có vấn đề."],["↩️","Trả máy đúng thời gian; đối chiếu tình trạng và hoàn cọc theo chính sách."]];
@@ -891,7 +884,6 @@ const BLOG=[
  ["Kiến thức","Mang gì cho chuyến đi 3 ngày?","Máy gọn, pin dự phòng, thẻ nhớ đủ dung lượng và đầu đọc thẻ OTG.","#combo","Xem combo du lịch"],
  ["Kiến thức","Combo quay sản phẩm từ 250K/ngày","Máy 4K kèm tripod, đèn Godox TT600 và lens khẩu lớn để sản phẩm lên hình sắc nét.","#combo","Xem combo"],
  ["Kiến thức","Chọn máy full-frame cho sự kiện","Sony A7 IV, Canon R6 Mark II cho sự kiện và cưới – tốc độ, lấy nét và chất lượng ảnh.","#devices","Xem máy"],
- ["Kiến thức","Thiết bị hình ảnh cho dự án chuyên nghiệp","Sony A7R V, Canon EOS R5, Nikon Z8 – liên hệ để được báo giá.","#book","Liên hệ báo giá"]
 ];
 
 /* ========= TIỆN ÍCH ========= */
