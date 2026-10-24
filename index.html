@@ -190,6 +190,11 @@ details.faq .a{padding:0 18px 16px}
 @media(min-width:960px){.two-col{grid-template-columns:1fr 1fr}}
 .res{padding:18px;margin-top:6px;display:none}
 .res.show{display:block}
+.quote{display:none;padding:12px 14px;border-radius:16px;background:rgba(127,127,127,.14);line-height:1.5}
+.quote.show{display:block}
+.quote b.tot{font-family:'Baloo 2';font-size:1.25rem}
+.qbox{margin:10px 0;padding:12px 14px;border-radius:16px;background:rgba(127,127,127,.14);line-height:1.55}
+.qbox b.tot{font-family:'Baloo 2';font-size:1.3rem}
 .err{color:#9B2C1F;font-weight:800;font-size:.9rem;min-height:1.2em}
 .advisor{display:grid;gap:18px;align-items:center;padding:24px}
 @media(min-width:860px){.advisor{grid-template-columns:200px 1fr}}
@@ -659,6 +664,7 @@ nav.menu{display:none!important}
      <div><label class="lbl" for="bFrom">Ngày nhận *</label><input class="inp" type="date" id="bFrom" name="ngay_nhan" required></div>
      <div><label class="lbl" for="bTo">Ngày trả *</label><input class="inp" type="date" id="bTo" name="ngay_tra" required></div>
     </div>
+    <div class="quote" id="bQuote" aria-live="polite"></div>
     <div class="fgrid two">
      <div><label class="lbl" for="bName">Họ tên *</label><input class="inp" id="bName" name="ho_ten" autocomplete="name" required></div>
      <div><label class="lbl" for="bPhone">Số điện thoại *</label><input class="inp" id="bPhone" name="so_dien_thoai" type="tel" inputmode="tel" autocomplete="tel" required></div>
@@ -728,11 +734,9 @@ const RATES=[
   ["Canon R100","150K","190K","240K","420K","620K"],
   ["Canon R10","200K","250K","320K","600K","850K"],
   ["Canon G7 X Mark III","170K","230K","300K","620K","900K"],
-  ["Canon R6 Mark II","450K","550K","750K","1.45TR","2TR"],
-  ["Canon 80D / 70D","140K","180K","250K","480K","650K"]]},
+  ["Canon R6 Mark II","450K","550K","750K","1.45TR","2TR"]]},
  {g:"Fujifilm",rows:[
-  ["Fujifilm X-M5 (Hot)","180K","230K","300K","550K","800K","Fujifilm X-M5"],
-  ["Fujifilm X-S20","320K","400K","500K","950K","1.4TR"],
+  ["Fujifilm X-M5","180K","230K","300K","550K","800K","Fujifilm X-M5"],
   ["Fujifilm X-S10","230K","280K","400K","700K","1TR"],
   ["Fujifilm X100V","320K","400K","500K","950K","1.4TR"],
   ["Fujifilm X-T30 / X-T30 II","190K","240K","320K","590K","850K","Fujifilm XT30"],
@@ -752,8 +756,8 @@ const RATES=[
   ["Nikon Z50","200K","250K","320K","600K","850K"],
   ["Nikon Z fc","220K","270K","350K","650K","900K"]]},
  {g:"Lumix / Panasonic",rows:[
-  ["Lumix G7","120K","160K","220K","400K","550K"],
-  ["Lumix GH5","220K","280K","380K","700K","980K"]]},
+  ["Lumix S5 II","120K","160K","220K","400K","550K"],
+  ["Lumix GH6","220K","280K","380K","700K","980K"]]},
  {g:"Quay chụp hành trình & phụ kiện rời",rows:[
   ["DJI Osmo Pocket 3","120K","150K","200K","380K","550K"],
   ["DJI Osmo Pocket 2","80K","110K","150K","280K","400K"],
@@ -761,7 +765,9 @@ const RATES=[
   ["Lens Sigma 18–50mm F2.8","100K","140K","200K","380K","480K","Sigma 18–50mm F2.8"],
   ["Lens Canon RF 50mm F1.8","60K","90K","130K","200K","250K","Canon RF 50mm F1.8"],
   ["Đèn Flash Godox TT600","80K","110K","160K","280K","350K","Godox TT600"],
-  ["Chân máy Tripod F360","40K","60K","80K","120K","150K","Tripod F360"]]}
+  ["Chân máy Tripod F360","40K","60K","80K","120K","150K","Tripod F360"],
+  ["Gimbal chống rung","60K","90K","120K","220K","300K"],
+  ["Micro thu âm","30K","50K","70K","120K","160K"]]}
 ];
 /* tra giá 1 ngày theo tên thiết bị (khớp tên đầy đủ hoặc tên khác) */
 const RATE_IDX={};RATES.forEach(g=>g.rows.forEach(r=>{RATE_IDX[r[0]]=r;if(r[6])RATE_IDX[r[6]]=r}));
@@ -802,12 +808,12 @@ const DEVICES=[
  {b:"Quay nhỏ gọn & khác",n:"GoPro Hero 12",img:"28-gopro-hero-12",spec:"Cảm biến 1/1.9 inch · 5.3K 60fps · chống nước 10m · HyperSmooth 6.0",hl:"Chống nước không cần vỏ, hợp hoạt động ngoài trời.",use:"Du lịch, thể thao, outdoor",needs:["travel"],price:null},
 ];
 const ACCS=[
- {n:"Sigma 18–50mm F2.8",d:"Lens khẩu lớn, xóa phông, hợp chân dung & sản phẩm.",price:null,img:"",e:"🔭"},
- {n:"Canon RF 50mm F1.8",d:"Lens tiêu cự 50mm cho chân dung xóa phông.",price:null,img:"",e:"👁️"},
- {n:"Godox TT600",d:"Flash rời, bổ trợ ánh sáng cho chụp sản phẩm.",price:null,img:"",e:"⚡"},
- {n:"Tripod F360",d:"Chân máy ổn định cho quay/chụp.",price:null,img:"",e:"📐"},
- {n:"Gimbal chống rung",d:"Tùy chọn thêm vào combo.",price:null,e:"🎥"},
- {n:"Micro thu âm",d:"Tùy chọn thêm vào combo.",price:null,e:"🎙️"}
+ {n:"Sigma 18–50mm F2.8",d:"Lens khẩu lớn, xóa phông, hợp chân dung & sản phẩm.",price:null,img:"sigma 18-50mm"},
+ {n:"Canon RF 50mm F1.8",d:"Lens tiêu cự 50mm cho chân dung xóa phông.",price:null,img:"canon rf 50mm"},
+ {n:"Godox TT600",d:"Flash rời, bổ trợ ánh sáng cho chụp sản phẩm.",price:null,img:"godox tt600"},
+ {n:"Tripod F360",d:"Chân máy ổn định cho quay/chụp.",price:null,img:"tripdod f360"},
+ {n:"Gimbal chống rung",d:"Tùy chọn thêm vào combo.",price:null,img:"gimbal"},
+ {n:"Micro thu âm",d:"Tùy chọn thêm vào combo.",price:null,img:"micro"}
 ];
 /* đồng bộ giá thẻ máy / phụ kiện với Bảng giá (cột "1 ngày"); máy chưa có trong bảng giá -> giữ nguyên */
 DEVICES.concat(ACCS).forEach(d=>{const r=rate1(d.n);if(r)d.price=r});
@@ -926,6 +932,42 @@ $$("[data-c]").forEach(el=>{
 });
 $("#yr").textContent=new Date().getFullYear();
 
+/* ========= BÁO GIÁ TỰ ĐỘNG (tra từ BẢNG GIÁ THUÊ ở trên) =========
+   Thuê 1/2/3 ngày: lấy đúng gói trong bảng. Trên 3 ngày: giá gói 3 ngày + mỗi ngày thêm = giá gói 3 ngày ÷ 3.
+   Combo: chưa có trong bảng giá -> báo khoảng giá/ngày của combo × số ngày. Thiết bị không có trong bảng -> báo giá sau khi xác nhận. */
+const parseVnd=s=>{const m=String(s).trim().match(/^([\d.]+)\s*(K|TR)$/i);if(!m)return null;const n=parseFloat(m[1]);return Math.round(m[2].toUpperCase()==="TR"?n*1e6:n*1e3)};
+const money=n=>n.toLocaleString("vi-VN")+"đ";
+function quoteFor(item,days){
+  const r=RATE_IDX[item];
+  if(r){
+    const t=r.slice(1,6).map(parseVnd);
+    if(t.some(x=>x==null))return null;
+    let total,how;
+    if(days<=3){total=t[days+1];how=`Gói ${days} ngày`}
+    else{const extra=Math.round(t[4]/3/1000)*1000;total=t[4]+(days-3)*extra;how=`Gói 3 ngày ${money(t[4])} + ${days-3} ngày thêm × ${money(extra)}`}
+    return {kind:"rate",total,how,short:days===1?{six:t[0],ten:t[1]}:null}
+  }
+  for(const g of COMBOS){const c=g.items.find(i=>i.n===item);if(c)return {kind:"combo",total:c.min*1000*days,range:c.p,how:`Combo ${c.p}/ngày × ${days} ngày`}}
+  return null;
+}
+function quoteHtml(q,days){
+  if(!q)return `Time Lens sẽ báo giá chính xác cho lựa chọn này khi xác nhận lịch trống.`;
+  if(q.kind==="combo")return `💰 Giá tạm tính từ <b class="tot">${money(q.total)}</b> cho ${days} ngày<br><span class="note">${q.how} (từ mức thấp nhất; giá cuối tùy lens/phụ kiện bạn chọn). Time Lens xác nhận giá chính xác khi chốt lịch.</span>`;
+  return `💰 Giá thuê <b class="tot">${money(q.total)}</b> cho ${days} ngày<br><span class="note">${q.how}.${q.short?` Thuê trong ngày: 6 tiếng ${money(q.short.six)} · 10 tiếng ${money(q.short.ten)}.`:""} Giá tham khảo, chưa gồm cọc/phí giao nhận (nếu có).</span>`;
+}
+function quoteText(item,days){
+  const q=quoteFor(item,days);
+  if(!q)return "Time Lens báo giá khi xác nhận";
+  return (q.kind==="combo"?"từ ":"")+money(q.total)+` (${q.how})`;
+}
+function updateQuote(){
+  const box=$("#bQuote"),item=$("#bItem").value.trim(),from=$("#bFrom").value,to=$("#bTo").value;
+  if(!item||!from||!to||to<from){box.classList.remove("show");box.innerHTML="";return}
+  const days=Math.round((new Date(to)-new Date(from))/864e5)+1;
+  box.innerHTML=quoteHtml(quoteFor(item,days),days);box.classList.add("show");
+}
+["#bItem","#bFrom","#bTo"].forEach(id=>{$(id).addEventListener("change",updateQuote);$(id).addEventListener("input",updateQuote)});
+
 /* ========= BOOKING SELECT ========= */
 function fillSelect(){
   let h='<option value="">— Chọn máy hoặc combo —</option>';
@@ -941,6 +983,7 @@ function goBook(item){
     let ok=[...s.options].some(o=>o.value===item||o.text===item);
     if(!ok){const o=document.createElement("option");o.textContent=item;s.insertBefore(o,s.options[1]);}
     s.value=item;
+    updateQuote();
   }
   closeModal();
   go("book");
@@ -1023,7 +1066,7 @@ $("#mBody").onclick=e=>{const b=e.target.closest("[data-m]");if(!b)return;if(b.d
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 
 /* ========= ACCESSORIES ========= */
-$("#accGrid").innerHTML=ACCS.map((a,i)=>`<article class="glass card hov"><div class="ph jpg" style="aspect-ratio:16/10"><span style="font-size:3rem">${a.e}</span></div><h3>${esc(a.n)}</h3><p class="note">${esc(a.d)}</p>${priceTag(a.price)}<div class="ctas"><button class="btn btn-p btn-s" data-a="${i}">Đặt thêm</button></div></article>`).join("");
+$("#accGrid").innerHTML=ACCS.map((a,i)=>`<article class="glass card hov">${imgBox(a)}<h3>${esc(a.n)}</h3><p class="note">${esc(a.d)}</p>${priceTag(a.price)}<div class="ctas"><button class="btn btn-p btn-s" data-a="${i}">Đặt thêm</button></div></article>`).join("");
 $("#accGrid").onclick=e=>{const b=e.target.closest("[data-a]");if(b)goBook(ACCS[+b.dataset.a].n)};
 
 /* ========= PRICING ========= */
@@ -1082,7 +1125,7 @@ $("#bookForm").onsubmit=async e=>{
   if(!/^(\+?84|0)\d{9,10}$/.test(phone.replace(/[\s.\-]/g,"")))return err.textContent="Số điện thoại chưa hợp lệ.",$("#bPhone").focus();
   const days=Math.round((new Date(to)-new Date(from))/864e5)+1;
   const fmt=d=>d.split("-").reverse().join("/");
-  const text=`Chào Time Lens, mình muốn kiểm tra lịch trống/đặt máy:\n• Máy/combo: ${item}\n• Ngày nhận: ${fmt(from)} – Ngày trả: ${fmt(to)} (${days} ngày)\n• Họ tên: ${name}\n• SĐT: ${phone}${note?"\n• Ghi chú: "+note:""}`;
+  const text=`Chào Time Lens, mình muốn kiểm tra lịch trống/đặt máy:\n• Máy/combo: ${item}\n• Ngày nhận: ${fmt(from)} – Ngày trả: ${fmt(to)} (${days} ngày)\n• Giá tạm tính: ${quoteText(item,days)}\n• Họ tên: ${name}\n• SĐT: ${phone}${note?"\n• Ghi chú: "+note:""}`;
   /* ===== GỬI THÔNG TIN VỀ EMAIL CHỦ SHOP (Web3Forms) + lưu bản sao trên Netlify Forms ===== */
   const btn=$("#bookForm").querySelector('button[type=submit]'),btn0=btn.innerHTML;
   btn.disabled=true;btn.textContent="Đang gửi…";
@@ -1093,7 +1136,7 @@ $("#bookForm").onsubmit=async e=>{
       .then(r=>r.json()).then(j=>j&&j.success===true));
   }
   jobs.push(fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
-    body:new URLSearchParams({"form-name":"dat-may","bot-field":"","may_combo":item,"ngay_nhan":fmt(from),"ngay_tra":fmt(to),"so_ngay":String(days),"ho_ten":name,"so_dien_thoai":phone,"ghi_chu":note,"noi_dung":text}).toString()}).then(r=>r.ok));
+    body:new URLSearchParams({"form-name":"dat-may","bot-field":"","may_combo":item,"ngay_nhan":fmt(from),"ngay_tra":fmt(to),"so_ngay":String(days),"tam_tinh":quoteText(item,days),"ho_ten":name,"so_dien_thoai":phone,"ghi_chu":note,"noi_dung":text}).toString()}).then(r=>r.ok));
   const rs=await Promise.allSettled(jobs);
   const sent=rs.some(x=>x.status==="fulfilled"&&x.value===true);
   btn.disabled=false;btn.innerHTML=btn0;
@@ -1101,6 +1144,7 @@ $("#bookForm").onsubmit=async e=>{
   r.innerHTML=(sent
     ?`<h3>🎉 Đã gửi yêu cầu cho Time Lens!</h3><p>Cảm ơn <b>${esc(name)}</b>! Yêu cầu thuê <b>${esc(item)}</b> từ <b>${fmt(from)}</b> đến <b>${fmt(to)}</b> (${days} ngày) đã được gửi. Time Lens sẽ liên hệ xác nhận lịch trống sớm nhất. Muốn nhanh hơn, bạn có thể nhắn Zalo hoặc gọi hotline.</p>`
     :`<h3>⚠️ Chưa gửi được tự động</h3><p>Rất tiếc, hệ thống chưa gửi được yêu cầu của <b>${esc(name)}</b>. Bạn vui lòng gửi nội dung bên dưới qua Zalo hoặc gọi hotline để Time Lens xác nhận nhé.</p>`)+`
+  <div class="qbox">${quoteHtml(quoteFor(item,days),days)}</div>
   <pre class="pre" id="bText">${esc(text)}</pre>
   <div class="ctas"><button class="btn btn-p" id="bZalo">💬 Sao chép &amp; mở Zalo</button><a class="btn btn-g" href="${telHref}">📞 Gọi ${CONFIG.phone}</a></div>
   <p class="note" style="margin-top:8px">Giờ mở cửa: ${CONFIG.hours}.</p>`;
