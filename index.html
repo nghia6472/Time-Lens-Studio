@@ -664,7 +664,7 @@ html[data-theme=dark] .art a.an-c{color:var(--ink)!important}
 .about-k{font-weight:900;letter-spacing:.08em;font-size:.85rem;color:var(--berry-d)}
 html[data-theme=dark] .about-k{color:#E3EDA3}
 .about-tx h2{margin:0;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.2}
-.about-tx p{margin:0;line-height:1.75;font-size:1.05rem}
+.about-tx p,.about-ul li{margin:0;line-height:1.75;font-size:1.05rem;text-align:justify;text-justify:inter-word}
 .about-ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
 .about-ul li{line-height:1.6}
 .about-tx .ctas{margin-top:6px;padding-top:0}
@@ -712,6 +712,18 @@ html[data-theme=dark] .bt-bi,html[data-theme=dark] .bt-ti,html[data-theme=dark] 
 .dp-dev b{font-size:.92rem;line-height:1.3}
 @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bt-brand{grid-column:span 2;grid-row:auto}.bt-wide{grid-column:span 2}.dial-panel{grid-template-columns:1fr}}
 @media(max-width:480px){.dp-devs{gap:8px}}
+.nw-top .nw-big>.note,.nw-top .nw-s .nw-sd{text-align:justify;text-justify:inter-word;hyphens:auto}
+.nw-top .nw-s .nw-sb{align-items:stretch}
+.nw-top .nw-s .nw-sb .nw-btn{align-self:flex-start}
+p,li,h1,h2,h3,h4,.note{text-wrap:pretty}
+h1,h2,h3,h4,.nw-top h3,.nw-top h4,.an-t{text-wrap:balance}
+.nw-top .nw-big>.note,.nw-top .nw-s .nw-sd{text-wrap:wrap;font-size:.86rem;line-height:1.5;text-align:justify;text-align-last:left;word-spacing:-.02em}
+.nw-top .nw-big>h3,.nw-top .nw-s h4{text-wrap:wrap}
+.nw-top .nw-big>h3,.nw-top .nw-big>.note,.nw-top .nw-big>.ctas,.nw-top .nw-s .nw-sb{margin-left:14px;margin-right:14px}
+.nw-top .nw-s .nw-sb{padding:0}
+.art-fig{overflow:hidden}
+.art-fig .art-cap{padding:8px 14px 10px;margin:0;font-size:.8rem;font-style:italic;color:var(--ink-soft);text-align:center;background:rgba(255,255,255,.18)}
+.art .art-fig .art-cap a{font-weight:600;text-decoration:underline}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -776,11 +788,10 @@ html[data-theme=dark] .bt-bi,html[data-theme=dark] .bt-ti,html[data-theme=dark] 
    <div class="about-tx">
     <span class="about-k">VỀ TIME LENS</span>
     <h2>Mỗi khoảnh khắc khác – Một câu chuyện</h2>
-    <p>Time Lens là cửa hàng cho thuê máy ảnh và thiết bị quay chụp tại Đà Nẵng. Chúng tôi giúp bạn có đúng chiếc máy cần dùng cho chuyến du lịch, buổi chụp chân dung, vlog hay sự kiện mà không phải đầu tư hàng chục triệu đồng.</p>
+    <p>Cho thuê máy ảnh và thiết bị quay chụp tại Đà Nẵng, giá đã gồm lens kit và fullset phụ kiện.</p>
     <ul class="about-ul">
-     <li>📷 Đa dạng máy ảnh Canon, Sony, Fujifilm, Lumix, Nikon, DJI cùng lens, gimbal, đèn flash, micro, tripod.</li>
-     <li>🎁 Giá thuê đã gồm lens kit và fullset phụ kiện, thuê theo giờ hoặc theo ngày.</li>
-     <li>🤝 Thủ tục nhanh gọn, nhận máy tại 120 Hoàng Minh Thảo hoặc giao tận nơi, hỗ trợ 9:00 – 20:00 hằng ngày.</li>
+     <li>📷 Canon, Sony, Fujifilm, Lumix, Nikon, DJI.</li>
+     <li>🤝 Nhận máy tại 120 Hoàng Minh Thảo hoặc giao tận nơi.</li>
     </ul>
     <div class="ctas"><a class="btn btn-p" href="#devices">Xem máy đang có sẵn</a><a class="btn btn-g" href="#book">Liên hệ đặt máy</a></div>
    </div>
@@ -1366,9 +1377,10 @@ function imgFail(el){
   if(i<CONFIG.imgExts.length){el.dataset.i=i;el.src=CONFIG.imgDir+el.dataset.b+"."+CONFIG.imgExts[i];}
   else{el.parentNode.innerHTML=camSvg;}
 }
-function aboutImgFail(el){const i=+el.dataset.i+1;
-  if(i<CONFIG.imgExts.length){el.dataset.i=i;el.src=CONFIG.imgDir+el.dataset.b+"."+CONFIG.imgExts[i];}
-  else{el.onerror=null;el.src=CONFIG.imgDir+"bai1_banner.webp";}}
+function aboutImgFail(el){const i=+el.dataset.i+1,ex=CONFIG.imgExts;
+  if(i<ex.length){el.dataset.i=i;el.src=CONFIG.imgDir+el.dataset.b+"."+ex[i];}
+  else if(el.dataset.b==="gioi-thieu"){el.dataset.b="bai1_banner";el.dataset.i=0;el.src=CONFIG.imgDir+"bai1_banner."+ex[0];}
+  else{el.onerror=null;el.closest("figure").style.background="linear-gradient(145deg,rgba(140,154,91,.35),rgba(255,255,255,.2))"}}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2600)}
 const priceTag=p=>p?`<div class="price">${esc(p)} <small>/ngày</small></div>`:`<div class="price" style="font-size:1.05rem">Liên hệ báo giá</div>`;
 
@@ -1840,6 +1852,28 @@ if("IntersectionObserver" in window){
   addEventListener("hashchange",()=>show(location.hash));
   show(location.hash,true);
 })();
+
+
+/* ===== Chú thích nguồn ảnh dưới ảnh trong bài viết =====
+   Sửa tại đây: text = tên tác giả/trang gốc, url = link tới ảnh/ghim gốc (để "" nếu không có). */
+const IMG_CREDITS={
+ bai1_in:{pre:"Ảnh:",text:"Time Lens",url:""},
+ bai2_in:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
+ bai3_in:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
+ bai4_in:{pre:"Nguồn ảnh:",text:"Pinterest",url:""}};
+document.querySelectorAll(".art-fig img[data-b]").forEach(img=>{const c=IMG_CREDITS[img.dataset.b];const fg=img.closest("figure");if(!c||!fg||fg.querySelector("figcaption"))return;
+ const cap=document.createElement("figcaption");cap.className="art-cap";
+ cap.append(c.pre+" ");
+ if(c.url){const a=document.createElement("a");a.href=c.url;a.target="_blank";a.rel="noopener noreferrer nofollow";a.textContent=c.text;cap.append(a)}else cap.append(c.text);
+ fg.append(cap)});
+/* chống chữ mồ côi: dính 2 từ cuối mỗi đoạn bằng khoảng trắng không ngắt */
+function noOrphan(root){(root||document).querySelectorAll(".art p,.art li,.art h1,.art h2,.art h3,.art-lead,.nw-top h3,.nw-top h4,.nw-top .note,.about-tx p,.about-ul li,.an-t,.an-d,.dp-d,.bt-t .note,.note").forEach(el=>{
+  if(el.dataset.no)return;el.dataset.no=1;{const t=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let q;while(q=t.nextNode())q.nodeValue=q.nodeValue.replace(/(\d)([–-])(\d)/g,"$1\u2060$2\u2060$3")}
+  const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let last=null,n;while(n=w.nextNode())if(n.nodeValue.trim())last=n;
+  if(!last)return;const v=last.nodeValue,m=v.match(/^([\s\S]*\S)\s+(\S+)(\s*)$/);
+  if(m)last.nodeValue=m[1]+"\u00A0"+m[2]+m[3]})}
+noOrphan();
+window.addEventListener("load",()=>noOrphan());
 </script>
 </body>
 </html>
