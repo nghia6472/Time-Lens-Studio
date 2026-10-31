@@ -616,6 +616,102 @@ html[data-theme=dark] .nw-more b{color:#E3EDA3!important}
 .nw-s .nw-sth .ph{position:absolute!important;inset:0;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
 .nw-s .nw-sth .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
 @media(max-width:560px){.nw-s .nw-sth{min-height:150px}}
+.nw-s .nw-sd{margin:0;font-size:.9rem;line-height:1.45;color:var(--ink-soft)}
+.nw-side a.nw-s{min-height:190px}
+.nw-s .nw-sth{min-height:190px}
+.nw-s .nw-sr{gap:0}
+.art p,.art li,.art-lead{text-align:justify;text-justify:inter-word;hyphens:auto;font-size:1.1rem;line-height:1.8}
+.art h2{font-size:1.5rem}
+.art-next{margin-top:34px;padding-top:22px;border-top:1px solid var(--glass-border)}
+.art-next .an-h{font-size:1.3rem;margin:0 0 14px}
+.an-grid{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.an-grid{grid-template-columns:1fr}}
+.art .an-c,.an-c{display:flex;flex-direction:column;text-decoration:none!important;font-weight:400;color:var(--ink)!important;border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.2),rgba(255,255,255,0) 40%),var(--lg-tint)!important;border:1px solid var(--glass-border)!important}
+.an-img{display:block;height:130px;position:relative;overflow:hidden}
+.an-img .ph{position:absolute!important;inset:0;height:100%!important;aspect-ratio:auto!important;border-radius:0;background:none}
+.an-img .ph::before,.an-img .ph::after{display:none!important}
+.an-img .ph img{width:100%;height:100%;object-fit:cover;mix-blend-mode:normal;animation:none;filter:none}
+.an-b{display:flex;flex-direction:column;gap:8px;padding:14px 16px 16px;align-items:flex-start}
+.an-t{font-weight:800;font-size:1.02rem;line-height:1.3;color:var(--ink)}
+.an-d{font-size:.88rem;line-height:1.45;text-align:left}
+.an-c .nw-btn{display:inline-flex;padding:8px 16px;border-radius:999px;font-weight:800;font-size:.9rem;background:linear-gradient(135deg,var(--berry-d),#6E7B42);color:#fff!important;box-shadow:0 6px 16px rgba(69,78,47,.3),inset 0 2px 0 rgba(255,255,255,.45)}
+html[data-theme=dark] .art a.an-c{color:var(--ink)!important}
+/* ===== Tin nổi bật: 4 thẻ ngang hàng ===== */
+.nw-top{grid-template-columns:repeat(4,1fr)!important;gap:16px;align-items:stretch}
+.nw-side{display:contents!important}
+.nw-top .nw-big,.nw-top .nw-side a.nw-s{display:flex!important;flex-direction:column;grid-template-columns:none!important;padding:0 0 16px!important;min-height:0!important;justify-content:flex-start;border-radius:24px;overflow:hidden}
+.nw-top .nw-big::after{display:none}
+.nw-top .nw-big .nw-img,.nw-top .nw-s .nw-sth{display:block;position:relative!important;width:auto!important;height:180px;min-height:0!important;margin:0 0 14px!important;translate:none;flex:none;overflow:hidden}
+.nw-top .nw-big .nw-img .ph,.nw-top .nw-s .nw-sth .ph{position:absolute!important;inset:0;width:100%;height:100%!important;min-height:0!important;aspect-ratio:auto!important;border-radius:0}
+.nw-top .nw-big>h3{font-size:1.12rem;line-height:1.3;margin:0 16px 8px;font-weight:800}
+.nw-top .nw-big>.note{font-size:.9rem;line-height:1.45;margin:0 16px 14px;color:var(--ink-soft)}
+.nw-top .nw-big>.ctas{margin:auto 16px 0;padding:0}
+.nw-top .nw-big .nw-n1{position:absolute;left:14px;top:14px;width:38px;height:38px;font-size:1.3rem;translate:none}
+.nw-top .nw-s .nw-sr{position:absolute;left:14px;top:14px;z-index:3}
+.nw-top .nw-s .nw-sb{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:0 16px;flex:1;justify-content:flex-start}
+.nw-top .nw-s h4{font-size:1.12rem;line-height:1.3;margin:0;font-weight:800}
+.nw-top .nw-s .nw-sd{margin:0}
+.nw-top .nw-s .nw-btn{margin-top:auto}
+.nw-top .nw-big .btn-p{padding:8px 16px;min-height:0;font-size:.9rem}
+@media(max-width:1100px){.nw-top{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:560px){.nw-top{grid-template-columns:1fr!important}}
+.nw-top .nw-big{gap:0!important}
+.nw-top .nw-big>h3{margin-top:0}
+.about-in{display:grid;grid-template-columns:1fr 1.05fr;gap:0;padding:0;align-items:stretch}
+.about-img{margin:0;position:relative;min-height:320px;overflow:hidden}
+.about-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.about-tx{padding:30px 32px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.about-k{font-weight:900;letter-spacing:.08em;font-size:.85rem;color:var(--berry-d)}
+html[data-theme=dark] .about-k{color:#E3EDA3}
+.about-tx h2{margin:0;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.2}
+.about-tx p{margin:0;line-height:1.75;font-size:1.05rem}
+.about-ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.about-ul li{line-height:1.6}
+.about-tx .ctas{margin-top:6px;padding-top:0}
+@media(max-width:820px){.about-in{grid-template-columns:1fr}.about-img{min-height:220px}.about-tx{padding:22px 20px}}
+.cat-head{text-align:left;margin:6px 0 16px}
+.cat-head h2{margin:2px 0 0;font-size:clamp(1.5rem,3vw,2rem)}
+.cat-head2{margin-top:40px}
+.cat-k{font-weight:900;letter-spacing:.1em;font-size:.8rem;color:var(--berry-d)}
+html[data-theme=dark] .cat-k{color:#E3EDA3}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.bt-brand{grid-column:span 2;grid-row:span 2;padding:22px;display:flex;flex-direction:column;gap:10px}
+.bt-brand h3{margin:0;font-size:1.3rem}
+.bt-brand .note{margin:0}
+.bt-bg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px;margin-top:6px}
+.bt-b{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;cursor:pointer;font:inherit;font-weight:800;color:var(--ink);padding:0}
+.bt-bi{display:block;width:100%;max-width:104px;aspect-ratio:1;border-radius:50%;position:relative;overflow:hidden;border:2px solid #fff;box-shadow:0 6px 16px rgba(69,78,47,.25),inset 0 0 0 1px var(--glass-border);background:radial-gradient(circle at 50% 55%,#fff,#E9E1C3);transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.bt-b:hover .bt-bi{transform:translateY(-4px) scale(1.06)}
+.bt-t{padding:16px;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);min-height:190px}
+.bt-ti{display:block;width:78px;height:78px;border-radius:22px;position:relative;overflow:hidden;margin-bottom:6px;background:radial-gradient(circle at 50% 55%,#fff,#E9E1C3);box-shadow:var(--lg-hi)}
+.bt-t b{font-size:1.1rem}
+.bt-t .note{font-size:.88rem;margin:0}
+.bt-go{margin-top:auto;font-weight:800;color:var(--berry-d);font-size:.92rem}
+html[data-theme=dark] .bt-go{color:#E3EDA3}
+.bt-wide{grid-column:span 4;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:16px 22px;text-decoration:none;color:var(--ink)}
+.bt-wide span:first-child{font-weight:900;font-size:1.1rem}
+.bt-wide span:nth-child(2){color:var(--ink-soft)}
+.bt-wide b{margin-left:auto;font-size:1.4rem}
+.bt-bi .ph,.bt-ti .ph,.dp-di .ph{position:absolute!important;inset:0;height:100%!important;aspect-ratio:auto!important;border-radius:0;background:none}
+.bt-bi .ph::before,.bt-bi .ph::after,.bt-ti .ph::before,.bt-ti .ph::after,.dp-di .ph::before,.dp-di .ph::after{display:none!important}
+.bt-bi .ph img,.bt-ti .ph img,.dp-di .ph img{width:100%;height:100%;object-fit:contain;padding:8%;mix-blend-mode:multiply;animation:none}
+.bt-ti .ph img[src*="bai1_banner"]{object-fit:cover;padding:0;mix-blend-mode:normal}
+html[data-theme=dark] .bt-bi,html[data-theme=dark] .bt-ti,html[data-theme=dark] .dp-di{background:radial-gradient(circle at 50% 55%,#F4EEDA,#CFC7A3)}
+.dial-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.dial-t{cursor:pointer;font:inherit;font-weight:800;color:var(--ink);display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid var(--glass-border);background:var(--lg-btn);box-shadow:var(--lg-hi);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:.25s}
+.dial-t[aria-selected=true]{background:linear-gradient(135deg,var(--berry-d),#6E7B42);color:#fff;border-color:transparent;transform:translateY(-2px)}
+.dial-panel{display:grid;grid-template-columns:1fr 1.3fr;gap:24px;padding:26px;align-items:center}
+.dp-tx{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.dp-e{font-size:2.4rem;line-height:1}
+.dp-tx h3{margin:0;font-size:1.6rem}
+.dp-d{margin:0;line-height:1.65;font-size:1.05rem}
+.dp-tx .note{margin:0}
+.dp-devs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.dp-dev{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.dp-di{display:block;width:100%;aspect-ratio:1;border-radius:24px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 55%,#fff,#E9E1C3);box-shadow:var(--lg-hi)}
+.dp-dev b{font-size:.92rem;line-height:1.3}
+@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bt-brand{grid-column:span 2;grid-row:auto}.bt-wide{grid-column:span 2}.dial-panel{grid-template-columns:1fr}}
+@media(max-width:480px){.dp-devs{gap:8px}}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -671,6 +767,37 @@ html[data-theme=dark] .nw-more b{color:#E3EDA3!important}
 </section>
 
 <section data-pg="home" style="padding:0 0 6px"><div class="wrap"><div class="hot-wrap"><nav class="hot" id="hotBar" aria-label="Chủ đề nổi bật"></nav></div></div></section>
+
+<!-- GIỚI THIỆU DOANH NGHIỆP -->
+<section id="aboutUs" data-pg="home" style="padding-top:10px">
+ <div class="wrap">
+  <div class="glass about-in">
+   <figure class="about-img"><img loading="lazy" alt="Time Lens – cho thuê máy ảnh tại Đà Nẵng" data-b="gioi-thieu" data-i="0" src="images/gioi-thieu.webp" onerror="aboutImgFail(this)"></figure>
+   <div class="about-tx">
+    <span class="about-k">VỀ TIME LENS</span>
+    <h2>Mỗi khoảnh khắc khác – Một câu chuyện</h2>
+    <p>Time Lens là cửa hàng cho thuê máy ảnh và thiết bị quay chụp tại Đà Nẵng. Chúng tôi giúp bạn có đúng chiếc máy cần dùng cho chuyến du lịch, buổi chụp chân dung, vlog hay sự kiện mà không phải đầu tư hàng chục triệu đồng.</p>
+    <ul class="about-ul">
+     <li>📷 Đa dạng máy ảnh Canon, Sony, Fujifilm, Lumix, Nikon, DJI cùng lens, gimbal, đèn flash, micro, tripod.</li>
+     <li>🎁 Giá thuê đã gồm lens kit và fullset phụ kiện, thuê theo giờ hoặc theo ngày.</li>
+     <li>🤝 Thủ tục nhanh gọn, nhận máy tại 120 Hoàng Minh Thảo hoặc giao tận nơi, hỗ trợ 9:00 – 20:00 hằng ngày.</li>
+    </ul>
+    <div class="ctas"><a class="btn btn-p" href="#devices">Xem máy đang có sẵn</a><a class="btn btn-g" href="#book">Liên hệ đặt máy</a></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- KHÁM PHÁ NHANH (bento) + CHẾ ĐỘ CHỤP -->
+<section id="homeCats" data-pg="home" style="padding-top:10px">
+ <div class="wrap">
+  <div class="cat-head"><span class="cat-k">KHÁM PHÁ NHANH</span><h2>Bạn đang tìm gì hôm nay?</h2></div>
+  <div class="bento" id="bento"></div>
+  <div class="cat-head cat-head2"><span class="cat-k">CHỌN CHẾ ĐỘ CHỤP</span><h2>Bạn định chụp gì?</h2></div>
+  <div class="dial-tabs" id="dialTabs" role="tablist"></div>
+  <div class="glass dial-panel" id="dialPanel" aria-live="polite"></div>
+ </div>
+</section>
 
 <section id="homeNews" data-pg="home" style="padding-top:10px">
  <div class="wrap">
@@ -1239,6 +1366,9 @@ function imgFail(el){
   if(i<CONFIG.imgExts.length){el.dataset.i=i;el.src=CONFIG.imgDir+el.dataset.b+"."+CONFIG.imgExts[i];}
   else{el.parentNode.innerHTML=camSvg;}
 }
+function aboutImgFail(el){const i=+el.dataset.i+1;
+  if(i<CONFIG.imgExts.length){el.dataset.i=i;el.src=CONFIG.imgDir+el.dataset.b+"."+CONFIG.imgExts[i];}
+  else{el.onerror=null;el.src=CONFIG.imgDir+"bai1_banner.webp";}}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2600)}
 const priceTag=p=>p?`<div class="price">${esc(p)} <small>/ngày</small></div>`:`<div class="price" style="font-size:1.05rem">Liên hệ báo giá</div>`;
 
@@ -1368,6 +1498,21 @@ function renderDevices(){
    <div class="ctas"><button class="btn btn-g btn-s" data-d="${i}">Chi tiết</button><button class="btn btn-g btn-s" data-bk="${i}">Kiểm tra lịch trống</button><button class="btn btn-p btn-s" data-bk="${i}">Đặt máy</button></div></article>`).join("")+(list.length>shown.length?`<div style="grid-column:1/-1;text-align:center"><button class="btn btn-g" id="devMoreBtn" type="button">Xem thêm máy (còn ${list.length-shown.length})</button></div>`:""):`<div class="glass empty" style="grid-column:1/-1">Chưa tìm thấy máy phù hợp 🥲 Thử đổi bộ lọc hoặc <a href="#advisor">nhờ Time Lens tư vấn</a> nhé!</div>`;
 }
 document.addEventListener("click",e=>{if(e.target.id==="devMoreBtn"){devShown+=9;renderDevices()}});
+
+/* ===== Khám phá nhanh (bento) + chọn chế độ chụp ===== */
+{const BR=[["Sony","38-sony-a6000","Sony"],["Canon","11-canon-r50","Canon"],["Fujifilm","20-fujifilm-xt30","Fujifilm"],["Nikon","24-nikon-z-fc","Nikon"],["Lumix","26-lumix-gh6","Lumix"],["Quay nhỏ gọn","27-dji-osmo-pocket-3","Quay nhỏ gọn & khác"]];
+ const TL=[["Lens","Xóa phông, chân dung","sigma 18-50mm","acc"],["Đèn Flash","Bổ sáng sản phẩm","godox tt600","acc"],["Gimbal & Micro","Quay mượt, tiếng rõ","gimbal","acc"],["Combo","Trọn bộ theo nhu cầu","bai1_banner","combo"]];
+ $("#bento").innerHTML=`<div class="glass bt-brand"><h3>🎞️ Máy ảnh theo hãng</h3><p class="note">Chọn hãng bạn quen tay, xem ngay các dòng máy đang có.</p><div class="bt-bg">${BR.map(([t,img,v])=>`<button class="bt-b" data-brand="${esc(v)}"><span class="bt-bi">${imgBox({n:t,img})}</span><span>${esc(t)}</span></button>`).join("")}</div></div>`+
+  TL.map(([t,d,img,id])=>`<a class="glass hov bt-t" href="#${id}"><span class="bt-ti">${imgBox({n:t,img})}</span><b>${esc(t)}</b><span class="note">${esc(d)}</span><span class="bt-go">Xem →</span></a>`).join("")+
+  `<a class="glass hov bt-wide" href="#pricing"><span>💰 Xem bảng giá</span><span>Chi tiết giá theo giờ · ngày · tuần</span><b>→</b></a>`;
+ $("#bento").onclick=e=>{const b=e.target.closest("[data-brand]");if(!b)return;state.brand=b.dataset.brand;state.need="";renderChips();renderDevices();go("devices")};
+ const mk=i=>{const m=MATCH[i];const ds=DEVICES.filter(x=>x.needs.includes(m.f)).sort((a,b)=>(b.png?1:0)-(a.png?1:0)).slice(0,3);
+  $("#dialPanel").innerHTML=`<div class="dp-tx"><span class="dp-e">${m.e}</span><h3>${esc(m.need)}</h3><p class="dp-d">Máy gợi ý: ${esc(m.dev)}.</p><p class="note">📖 “${esc(m.blog)}”</p><button class="btn btn-p" data-f="${m.f}">Xem máy phù hợp</button></div><div class="dp-devs">${ds.map(d=>`<div class="dp-dev"><span class="dp-di">${imgBox({n:d.n,img:d.img,png:d.png})}</span><b>${esc(d.n)}</b></div>`).join("")}</div>`;
+  document.querySelectorAll("#dialTabs button").forEach((b,j)=>b.setAttribute("aria-selected",j===i))};
+ $("#dialTabs").innerHTML=MATCH.map((m,i)=>`<button class="dial-t" role="tab" data-i="${i}" aria-selected="false"><span>${m.e}</span>${esc(m.need)}</button>`).join("");
+ $("#dialTabs").onclick=e=>{const b=e.target.closest(".dial-t");if(b)mk(+b.dataset.i)};
+ $("#dialPanel").onclick=e=>{const b=e.target.closest("[data-f]");if(!b)return;state.need=b.dataset.f;state.brand="";renderChips();renderDevices();go("devices")};
+ mk(0);}
 $("#brandChips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;state.brand=b.dataset.b;renderChips();renderDevices()};
 $("#needChips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;state.need=b.dataset.n;renderChips();renderDevices()};
 $("#q").oninput=e=>{state.q=e.target.value;renderDevices()};
@@ -1447,9 +1592,15 @@ $("#blogGrid").innerHTML=BLOG.map(b=>`<article class="glass card hov"><span clas
  $("#hotBar").innerHTML='<b>🔥 ĐANG HOT:</b>'+[["#"+A[0].id,"Giá thuê máy ảnh"],["#"+A[3].id,"Máy ảnh đi du lịch"],["#"+A[2].id,"Sony · Canon · Fuji"],["#"+A[1].id,"Kinh nghiệm cho người mới"]].map(x=>`<a href="${x[0]}">${x[1]}</a>`).join("");
  // tin nổi bật: 1 bài lớn + 3 bài bên cạnh
  const thumb=i=>imgBox({n:A[i].t,img:"bai"+(i+1)+"_banner"});
- $("#nwTop").innerHTML=`<article class="glass card hov nw-big"><div class="nw-img">${imgBox({n:A[0].t,img:"bai1_banner"})}</div><span class="nw-n nw-n1">1</span><span class="badge" style="align-self:flex-start">🔥 HOT · ${esc(A[0].tag)}</span><h3>${esc(A[0].t)}</h3><p class="note">${esc(A[0].d)}</p><div class="ctas"><a class="btn btn-p btn-s" href="#${A[0].id}">Đọc bài viết →</a></div></article>
- <div class="nw-side">${A.slice(1).map((a,i)=>`<a class="glass hov nw-s" href="#${a.id}"><span class="nw-sth">${thumb(i+1)}</span><span class="nw-sb"><span class="nw-sr"><span class="nw-n nw-n1 nw-ns">${i+2}</span><span class="badge nw-bd">${esc(a.tag)}</span></span><h4>${esc(a.t)}</h4><span class="nw-btn">Đọc bài viết →</span></span></a>`).join("")}</div>`;
+ $("#nwTop").innerHTML=`<article class="glass card hov nw-big"><div class="nw-img">${imgBox({n:A[0].t,img:"bai1_banner"})}</div><span class="nw-n nw-n1">1</span><h3>${esc(A[0].t)}</h3><p class="note">${esc(A[0].d)}</p><div class="ctas"><a class="btn btn-p btn-s" href="#${A[0].id}">Đọc bài viết →</a></div></article>
+ <div class="nw-side">${A.slice(1).map((a,i)=>`<a class="glass hov nw-s" href="#${a.id}"><span class="nw-sth">${thumb(i+1)}</span><span class="nw-sb"><span class="nw-sr"><span class="nw-n nw-n1 nw-ns">${i+2}</span></span><h4>${esc(a.t)}</h4><p class="note nw-sd">${esc(a.d)}</p><span class="nw-btn">Đọc bài viết →</span></span></a>`).join("")}</div>`;
  $("#nwMidHome").innerHTML=`<div class="nw-more"><b>ĐỌC THÊM</b>${[0,1,2,3].map(L).join("")}</div>`;
+ // cuối mỗi bài viết: gợi ý đọc tiếp 3 bài tin nổi bật còn lại
+ A.forEach((cur,ci)=>{const art=document.querySelector("#"+cur.id+" article.art");if(!art)return;
+  const others=A.map((a,i)=>[a,i]).filter(([a,i])=>i!==ci);
+  const box=document.createElement("div");box.className="art-next";
+  box.innerHTML=`<h2 class="an-h">Đọc tiếp tin nổi bật</h2><div class="an-grid">${others.map(([a,i])=>`<a class="glass hov an-c" href="#${a.id}"><span class="an-img">${imgBox({n:a.t,img:"bai"+(i+1)+"_banner"})}</span><span class="an-b"><span class="an-t">${esc(a.t)}</span><span class="note an-d">${esc(a.d)}</span><span class="nw-btn">Đọc bài viết →</span></span></a>`).join("")}</div>`;
+  art.appendChild(box)});
  // footer
  $("#ftArts").innerHTML=A.map(a=>`<p><a href="#${a.id}">${esc(a.t)}</a></p>`).join("");
  // khối "Đọc thêm" ở cuối từng trang chức năng (mỗi trang trỏ tới 2-3 bài khác nhau)
