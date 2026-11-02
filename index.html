@@ -1009,7 +1009,7 @@ html[data-theme=dark] .cat-head h2{color:#F4EEDA}
 <h3>Dịch vụ thuê máy ảnh không cần thế chấp</h3>
 <p>Tùy thuộc vào dòng máy và hồ sơ cá nhân, Time Lens có các chính sách hỗ trợ thuê máy ảnh không cần thế chấp tài sản giá trị lớn, giúp sinh viên, học sinh hoặc người mới đi làm dễ dàng tiếp cận với thiết bị quay chụp hơn.</p>
 
-<figure class="art-fig art-fig-b"><img loading="lazy" alt="Kiểm tra máy ảnh trước khi nhận thuê" data-b="bai2_banner" data-i="0" src="images/bai2_banner.webp" onerror="imgFail(this)"></figure>
+<figure class="art-fig art-fig-b"><img loading="lazy" alt="Kiểm tra máy ảnh trước khi nhận thuê" data-b="anh2" data-i="0" src="images/anh2.jpg" onerror="imgFail(this)"></figure>
 
 <h2>Lưu ý kiểm tra máy ảnh trước khi thuê</h2>
 <p>Để chuyến đi trọn vẹn, hãy ghi nhớ các bước kiểm tra (test máy) cơ bản khi nhận thiết bị:</p>
@@ -1042,7 +1042,7 @@ html[data-theme=dark] .cat-head h2{color:#F4EEDA}
 <p>Canon luôn nổi tiếng với tông màu da (skin tone) hồng hào, nịnh mắt. Nếu bạn tìm máy ảnh chụp chân dung đẹp nhất nên thuê, hoặc cần chụp sản phẩm, Canon là lựa chọn số một.</p>
 <p>Time Lens cung cấp các dòng từ phổ thông như Canon M10, M50, R100 đến các dòng mạnh mẽ như Canon R50, R10, và đặc biệt là dòng chuyên nghiệp Canon R6 Mark II.</p>
 
-<figure class="art-fig art-fig-b"><img loading="lazy" alt="Máy ảnh Sony, Canon, Fujifilm cho thuê" data-b="bai3_banner" data-i="0" src="images/bai3_banner.webp" onerror="imgFail(this)"></figure>
+<figure class="art-fig art-fig-b"><img loading="lazy" alt="Máy ảnh Sony, Canon, Fujifilm cho thuê" data-b="anh3" data-i="0" src="images/anh3.jpg" onerror="imgFail(this)"></figure>
 
 <h2>Cho thuê máy ảnh Sony – đỉnh cao công nghệ lấy nét</h2>
 <p>Sony thống trị mảng Mirrorless nhờ hệ thống lấy nét siêu tốc và khả năng quay video vượt trội.</p>
@@ -1084,7 +1084,7 @@ html[data-theme=dark] .cat-head h2{color:#F4EEDA}
 </ul>
 <p>Bên cạnh máy ảnh, thuê thiết bị hành trình như DJI Osmo Pocket 3 hoặc GoPro Hero 12 cũng là lựa chọn tuyệt vời cho các chuyến phượt, quay dưới nước.</p>
 
-<figure class="art-fig art-fig-b"><img loading="lazy" alt="Combo máy ảnh đi du lịch, quay vlog, chụp chân dung" data-b="bai4_banner" data-i="0" src="images/bai4_banner.webp" onerror="imgFail(this)"></figure>
+<figure class="art-fig art-fig-b"><img loading="lazy" alt="Combo máy ảnh đi du lịch, quay vlog, chụp chân dung" data-b="anh4" data-i="0" src="images/anh4.jpg" onerror="imgFail(this)"></figure>
 
 <h2>Combo Quay Phim / Vlog / TikTok (từ 180K/ngày)</h2>
 <h3>Thuê máy ảnh quay vlog chuyên nghiệp</h3>
@@ -1888,6 +1888,9 @@ const IMG_CREDITS={
  bai2_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
  bai3_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
  anh1:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
+ anh2:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
+ anh3:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
+ anh4:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
  bai4_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""}};
 
 document.querySelectorAll(".art-fig img[data-b]").forEach(img=>{const c=IMG_CREDITS[img.dataset.b];const fg=img.closest("figure");if(!c||!fg||fg.querySelector("figcaption"))return;
