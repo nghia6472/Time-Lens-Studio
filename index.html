@@ -1887,7 +1887,9 @@ const IMG_CREDITS={
  bai1_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
  bai2_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
  bai3_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
+ anh1:{pre:"Nguồn ảnh:",text:"Pinterest",url:""},
  bai4_banner:{pre:"Nguồn ảnh:",text:"Pinterest",url:""}};
+
 document.querySelectorAll(".art-fig img[data-b]").forEach(img=>{const c=IMG_CREDITS[img.dataset.b];const fg=img.closest("figure");if(!c||!fg||fg.querySelector("figcaption"))return;
  const cap=document.createElement("figcaption");cap.className="art-cap";
  cap.append(c.pre+" ");
