@@ -695,7 +695,7 @@ html[data-theme=dark] .bt-go{color:#E3EDA3}
 .bt-bi .ph,.bt-ti .ph,.dp-di .ph{position:absolute!important;inset:0;height:100%!important;aspect-ratio:auto!important;border-radius:0;background:none}
 .bt-bi .ph::before,.bt-bi .ph::after,.bt-ti .ph::before,.bt-ti .ph::after,.dp-di .ph::before,.dp-di .ph::after{display:none!important}
 .bt-bi .ph img,.bt-ti .ph img,.dp-di .ph img{width:100%;height:100%;object-fit:contain;padding:8%;mix-blend-mode:multiply;animation:none}
-.bt-ti .ph img[src*="bai1_banner"]{object-fit:cover;padding:0;mix-blend-mode:normal}
+.bt-ti .ph img[data-b="combo"]{object-fit:cover;padding:0;mix-blend-mode:normal}
 html[data-theme=dark] .bt-bi,html[data-theme=dark] .bt-ti,html[data-theme=dark] .dp-di{background:radial-gradient(circle at 50% 55%,#F4EEDA,#CFC7A3)}
 .dial-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .dial-t{cursor:pointer;font:inherit;font-weight:800;color:var(--ink);display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid var(--glass-border);background:var(--lg-btn);box-shadow:var(--lg-hi);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:.25s}
@@ -787,7 +787,7 @@ html[data-theme=dark] .cat-head h2{color:#F4EEDA}
 <section id="aboutUs" data-pg="home" style="padding-top:10px">
  <div class="wrap">
   <div class="glass about-in">
-   <figure class="about-img"><img loading="lazy" alt="Time Lens – cho thuê máy ảnh tại Đà Nẵng" data-b="gioi-thieu" data-i="0" src="images/gioi-thieu.webp" onerror="aboutImgFail(this)"></figure>
+   <figure class="about-img"><img loading="lazy" alt="Time Lens – cho thuê máy ảnh tại Đà Nẵng" data-b="gioithieu" data-i="0" src="images/gioithieu.webp" onerror="aboutImgFail(this)"></figure>
    <div class="about-tx">
     <span class="about-k">VỀ TIME LENS</span>
     <h2>Mỗi khoảnh khắc khác – Một câu chuyện</h2>
@@ -1378,7 +1378,7 @@ function imgFail(el){
 }
 function aboutImgFail(el){const i=+el.dataset.i+1,ex=CONFIG.imgExts;
   if(i<ex.length){el.dataset.i=i;el.src=CONFIG.imgDir+el.dataset.b+"."+ex[i];}
-  else if(el.dataset.b==="gioi-thieu"){el.dataset.b="bai1_banner";el.dataset.i=0;el.src=CONFIG.imgDir+"bai1_banner."+ex[0];}
+  else if(el.dataset.b==="gioithieu"){el.dataset.b="bai1_banner";el.dataset.i=0;el.src=CONFIG.imgDir+"bai1_banner."+ex[0];}
   else{el.onerror=null;el.closest("figure").style.background="linear-gradient(145deg,rgba(140,154,91,.35),rgba(255,255,255,.2))"}}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),2600)}
 const priceTag=p=>p?`<div class="price">${esc(p)} <small>/ngày</small></div>`:`<div class="price" style="font-size:1.05rem">Liên hệ báo giá</div>`;
@@ -1512,7 +1512,7 @@ document.addEventListener("click",e=>{if(e.target.id==="devMoreBtn"){devShown+=9
 
 /* ===== Khám phá nhanh (bento) + chọn chế độ chụp ===== */
 {const BR=[["Sony","38-sony-a6000","Sony"],["Canon","11-canon-r50","Canon"],["Fujifilm","20-fujifilm-xt30","Fujifilm"],["Nikon","24-nikon-z-fc","Nikon"],["Lumix","26-lumix-gh6","Lumix"],["Quay nhỏ gọn","27-dji-osmo-pocket-3","Quay nhỏ gọn & khác"]];
- const TL=[["Lens","Xóa phông, chân dung","sigma 18-50mm","acc"],["Đèn Flash","Bổ sáng sản phẩm","godox tt600","acc"],["Gimbal & Micro","Quay mượt, tiếng rõ","gimbal","acc"],["Combo","Trọn bộ theo nhu cầu","bai1_banner","combo"]];
+ const TL=[["Lens","Xóa phông, chân dung","sigma 18-50mm","acc"],["Đèn Flash","Bổ sáng sản phẩm","godox tt600","acc"],["Gimbal & Micro","Quay mượt, tiếng rõ","gimbal","acc"],["Combo","Trọn bộ theo nhu cầu","combo","combo"]];
  $("#bento").innerHTML=`<div class="glass bt-brand"><h3>🎞️ Máy ảnh theo hãng</h3><p class="note">Chọn hãng bạn quen tay, xem ngay các dòng máy đang có.</p><div class="bt-bg">${BR.map(([t,img,v])=>`<button class="bt-b" data-brand="${esc(v)}"><span class="bt-bi">${imgBox({n:t,img})}</span><span>${esc(t)}</span></button>`).join("")}</div></div>`+
   TL.map(([t,d,img,id])=>`<a class="glass hov bt-t" href="#${id}"><span class="bt-ti">${imgBox({n:t,img})}</span><b>${esc(t)}</b><span class="note">${esc(d)}</span><span class="bt-go">Xem →</span></a>`).join("")+
   `<a class="glass hov bt-wide" href="#pricing"><span>💰 Xem bảng giá</span><span>Chi tiết giá theo giờ · ngày · tuần</span><b>→</b></a>`;
