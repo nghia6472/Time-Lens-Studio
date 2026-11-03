@@ -1877,21 +1877,21 @@ if("IntersectionObserver" in window){
 })();
 
 
-/* ===== Chú thích nguồn ảnh dưới ảnh trong bài viết =====
+/* ===== Chú thích Nguồn dưới ảnh trong bài viết =====
    Sửa tại đây: text = tên tác giả/trang gốc, url = link tới ảnh/ghim gốc (để "" nếu không có). */
 const IMG_CREDITS={
- bai1_in:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai2_in:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai3_in:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai4_in:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai1_banner:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai2_banner:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai3_banner:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- anh1:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- anh2:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- anh3:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- anh4:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""},
- bai4_banner:{pre:"Nguồn ảnh:",text:"Tham Khảo",url:""}};
+ bai1_in:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai2_in:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai3_in:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai4_in:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai1_banner:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai2_banner:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai3_banner:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ anh1:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ anh2:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ anh3:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ anh4:{pre:"Nguồn:",text:"Tham Khảo",url:""},
+ bai4_banner:{pre:"Nguồn:",text:"Tham Khảo",url:""}};
 
 document.querySelectorAll(".art-fig img[data-b]").forEach(img=>{const c=IMG_CREDITS[img.dataset.b];const fg=img.closest("figure");if(!c||!fg||fg.querySelector("figcaption"))return;
  const cap=document.createElement("figcaption");cap.className="art-cap";
